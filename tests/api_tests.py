@@ -4,10 +4,10 @@ import unittest
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 from infra.API.API_wrapper import APIWrapper
-from logic.API_labels import labels
-from logic.API_projects import Project
-from logic.API_sections import Section
-from logic.API_tasks import Tasks
+from logic.API.API_labels import labels
+from logic.API.API_projects import Project
+from logic.API.API_sections import Section
+from logic.API.API_tasks import Tasks
 
 
 class MainTester(unittest.TestCase):
