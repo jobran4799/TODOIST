@@ -1,7 +1,7 @@
 import json
 
 try:
-    with open('../../config.json') as f:
+    with open('config.json') as f:
         data = json.load(f)
 except FileNotFoundError:
     print("Error: 'config.json' file not found. Make sure the file exists in the correct location.")
