@@ -1,5 +1,5 @@
 import unittest
-from infra.Brawser_Wrapper import BrowserWrapper
+from infra.UI.Brawser_Wrapper import BrowserWrapper
 from logic.Log_in_page import LoginPage
 from logic.Main_page import MainPage
 from logic.Project_List_Page import ProjectListPage

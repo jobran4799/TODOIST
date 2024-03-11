@@ -1,7 +1,5 @@
 import json
 
-from infra.API_wrapper import APIWrapper
-
 try:
     with open('../Config_Manegre/config.json') as f:
         data = json.load(f)
