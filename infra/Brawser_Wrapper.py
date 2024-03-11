@@ -1,8 +1,7 @@
 import json
 import time
-from os.path import dirname, join
-
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
 try:
     with open('../Config_Manegre/config.json') as f:
@@ -18,24 +17,29 @@ class BrowserWrapper:
         self.driver = None
 
     def get_driver(self, brawser):
-
+        if data["headless"]:
+            option = Options()
+            option.add_argument('--headless')
         if data["grid"]:
             if brawser.lower() == 'chrome':
                 options = webdriver.ChromeOptions()
+                options.add_argument('--headless')
             elif brawser.lower() == 'firefox':
                 options = webdriver.FirefoxOptions()
+                options.add_argument('--headless')
             elif brawser.lower() == 'edge':
                 options = webdriver.EdgeOptions()
+                options.add_argument('--headless')
             platform_name = data["platform"]
             options.add_argument(f'--platformName={platform_name}')
             self.driver = webdriver.Remote(command_executor=data["hub"], options=options)
         else:
             if brawser.lower() == 'chrome':
-                self.driver = webdriver.Chrome()
+                self.driver = webdriver.Chrome(options=option)
             elif brawser.lower() == 'firefox':
-                self.driver = webdriver.Firefox()
+                self.driver = webdriver.Firefox(options=option)
             elif brawser.lower() == 'edge':
-                self.driver = webdriver.Edge()
+                self.driver = webdriver.Edge(options=option)
         url = data["url"]
         self.driver.get(url)
         time.sleep(4)
