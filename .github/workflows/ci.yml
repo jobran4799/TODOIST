@@ -37,11 +37,11 @@ jobs:
         run: |
           # Replace this with your actual command to run UI tests
             # For example:
-            # python tests/UI/tests_example_run.py
+            python tests/UI/tests_example_run.py
           
 
       - name: Run API tests
         run: |
           # Replace this with your actual command to run API tests
           # For example:
-          # python tests/API/api_tasks_tests.py
+          python tests/API/api_tasks_tests.py
