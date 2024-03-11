@@ -6,7 +6,7 @@ from infra.UI.Brawser_Wrapper import BrowserWrapper
 from tests.API.api_parallel_tests import api_parallel_tests
 
 try:
-    with open('../../Config_Manegre/config.json') as f:
+    with open('../../config.json') as f:
         data = json.load(f)
 except FileNotFoundError:
     print("Error: 'config.json' file not found. Make sure the file exists in the correct location.")
