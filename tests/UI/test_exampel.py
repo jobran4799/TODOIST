@@ -2,8 +2,8 @@ import time
 import unittest
 
 from infra.UI.Brawser_Wrapper import BrowserWrapper
-from logic.UI.Log_in_page import LoginPage
-from logic.UI.Main_page import MainPage
+from logic.Log_in_page import LoginPage
+from logic.Main_page import MainPage
 
 
 class test_example(unittest.TestCase):
