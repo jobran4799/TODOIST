@@ -2,7 +2,7 @@
   "hub" : "http://10.0.0.6:4444",
   "url":"https://app.todoist.com/",
   "grid": false,
-  "parallel": true,
+  "parallel": false,
   "serial": false,
   "browser": "chrome",
   "platform": "windows",
@@ -12,5 +12,5 @@
   "url_sections_api": "https://api.todoist.com/rest/v2/sections",
   "url_tasks_api": "https://api.todoist.com/rest/v2/tasks",
   "url_label_api": "https://api.todoist.com/rest/v2/labels",
-  "headless": false
+  "headless": true
 }
