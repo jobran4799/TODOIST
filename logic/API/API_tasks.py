@@ -1,7 +1,7 @@
 import json
 
 try:
-    with open('config.json') as f:
+    with open('../../config.json') as f:
         data = json.load(f)
 except FileNotFoundError:
     print("Error: 'config.json' file not found. Make sure the file exists in the correct location.")
@@ -21,14 +21,14 @@ class Tasks:
         res = self.my_api.make_post_request(data["url_tasks_api"], body)
         return res
 
-    def update_tasks(self, id, body):
-        id_to_send = f"/{id}"
-        res = self.my_api.make_post_request_with_id(data["url_tasks_api"], id_to_send, body)
+    def update_tasks(self, name, body):
+        name_to_send = f"?content={name}"
+        res = self.my_api.make_post_request_with_id(data["url_tasks_api"], name_to_send, body)
         return res
 
-    def delete_tasks(self, id):
-        id_to_send = f"/{id}"
-        res = self.my_api.make_delete_request(data["url_tasks_api"], id_to_send)
+    def delete_tasks(self, name):
+        name_to_send = f"?content={name}"
+        res = self.my_api.make_delete_request(data["url_tasks_api"], name_to_send)
         return res
 
 
