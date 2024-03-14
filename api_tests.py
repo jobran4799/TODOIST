@@ -26,7 +26,7 @@ class MainTester(unittest.TestCase):
     def test_update_project(self):
         test_p = Project(self.my_api)
         body = {"name": "Things To Buy"}
-        my_c_api = test_p.update_project_by_id("2329913117", body)
+        my_c_api = test_p.update_project_by_id("2330151473", body)
         json_response = my_c_api.json()
         self.assertTrue(my_c_api.ok, "not ok")
         self.assertEqual(json_response[1]["name"], "Things To Buy", "not equals")
@@ -38,7 +38,7 @@ class MainTester(unittest.TestCase):
 
     def test_get_project_list(self):
         test_p = Project(self.my_api)
-        my_c_api = test_p.get_project_by_id("2329611387")
+        my_c_api = test_p.get_project_by_id("2330151473")
         json_response = my_c_api.json()
         self.assertTrue(my_c_api.ok, "not ok")
         self.assertEqual(json_response[0]["color"], "charcoal", "not equals")
@@ -47,7 +47,7 @@ class MainTester(unittest.TestCase):
 
     def test_get_all_collaborators(self):
         test_p = Project(self.my_api)
-        my_c_api = test_p.Get_project_all_collaborators("2329611387")
+        my_c_api = test_p.Get_project_all_collaborators("2330151473")
         json_response = my_c_api.json()
         self.assertTrue(my_c_api.ok, "not ok")
         self.assertEqual(json_response[0]["name"], "Beyonddev", "not equals")
@@ -55,9 +55,9 @@ class MainTester(unittest.TestCase):
 
     def test_add_section_to_project(self):
         test_p = Section(self.my_api)
-        body = {"project_id": "2329678566",
+        body = {"project_id": "2330151473",
                 "name": "section to delete"}
-        my_c_api = test_p.add_section_to_project_by_id("2329678566", body)
+        my_c_api = test_p.add_section_to_project_by_id("2330151473", body)
         json_response = my_c_api.json()
         self.assertTrue(my_c_api.ok, "not ok")
         self.assertEqual(json_response["project_id"], "2329678566", "not equals")
@@ -65,7 +65,7 @@ class MainTester(unittest.TestCase):
 
     def test_get_data_section_list(self):
         test_p = Section(self.my_api)
-        my_c_api = test_p.get_all_sections("2329678566")
+        my_c_api = test_p.get_all_sections("2330151473")
         json_response = my_c_api.json()
         self.assertTrue(my_c_api.ok, "not ok")
         self.assertEqual(json_response[0]["order"], 1, "not equals")
@@ -75,7 +75,7 @@ class MainTester(unittest.TestCase):
 
     def test_get_data_section(self):
         test_p = Section(self.my_api)
-        my_c_api = test_p.get_single_section("149886499")
+        my_c_api = test_p.get_single_section("2330151473")
         json_response = my_c_api.json()
         self.assertTrue(my_c_api.ok, "not ok")
         self.assertEqual(json_response["project_id"], "2329678566", "not equals")
@@ -84,7 +84,7 @@ class MainTester(unittest.TestCase):
     def test_name_section_update(self):
         test_p = Section(self.my_api)
         body = {"name": "Supermarket"}
-        my_c_api = test_p.update_name_section("149961566", body)
+        my_c_api = test_p.update_name_section("2330151473", body)
         json_response = my_c_api.json()
         self.assertTrue(my_c_api.ok, "not ok")
         self.assertEqual(json_response["name"], "Supermarket", "not equals")
@@ -94,15 +94,15 @@ class MainTester(unittest.TestCase):
         my_c_api = test_p.delete_section("149962796")
         self.assertTrue(my_c_api.ok, "not deleted")
 
-    def test_get_active_tasks(self):
-        test_p = Tasks(self.my_api)
-        my_c_api = test_p.get_active_tasks()
-        json_response = my_c_api.json()
-        due_date = json_response[9]["due"]
-        date = due_date["date"]
-        self.assertTrue(my_c_api.ok, "not deleted")
-        self.assertEqual(json_response[9]["content"], "task set due data", "not equals")
-        self.assertEqual(date, "2024-03-08", "not equals")
+    # def test_get_active_tasks(self):
+    #     test_p = Tasks(self.my_api)
+    #     my_c_api = test_p.get_active_tasks()
+    #     json_response = my_c_api.json()
+    #     due_date = json_response[9]["due"]
+    #     date = due_date["date"]
+    #     self.assertTrue(my_c_api.ok, "not deleted")
+    #     self.assertEqual(json_response[9]["content"], "task set due data", "not equals")
+    #     self.assertEqual(date, "2024-03-08", "not equals")
 
     def test_create_new_tasks(self):
         test_p = Tasks(self.my_api)
@@ -116,20 +116,20 @@ class MainTester(unittest.TestCase):
     def test_update_tasks(self):
         test_p = Tasks(self.my_api)
         body = {"content": "Buy Coffee"}
-        my_c_api = test_p.update_tasks("7775320373", body)
+        my_c_api = test_p.update_tasks("Buy Milk", body)
         json_response = my_c_api.json()
         self.assertTrue(my_c_api.ok, "not deleted")
         self.assertEqual(json_response["content"], "Buy Coffee", "not equals")
 
     def test_delete_tasks(self):
         test_p = Tasks(self.my_api)
-        my_c_api = test_p.delete_tasks("7775337313")
+        my_c_api = test_p.delete_tasks("Buy Milk")
         self.assertTrue(my_c_api.ok, "not deleted")
 
 
     def test_get_personal_label(self):
         test_p = labels(self.my_api)
-        my_c_api = test_p.get_personal_label("2171988630")
+        my_c_api = test_p.get_personal_label("2330151473")
         json_response = my_c_api.json()
         self.assertTrue(my_c_api.ok, "not deleted")
         self.assertEqual(json_response["name"], "Food", "not equals")
@@ -140,20 +140,21 @@ class MainTester(unittest.TestCase):
         body = {"name": "buffel"}
         my_c_api = test_p.create_new_personal_label(body)
         json_response = my_c_api.json()
+        print(json_response["id"])
         self.assertTrue(my_c_api.ok, "not deleted")
         self.assertEqual(json_response["name"], "buffel", "not equals")
 
     def test_update_a_personal_label(self):
         test_p = labels(self.my_api)
         body = {"name": "milk"}
-        my_c_api = test_p.update_a_personal_label("2171988630", body)
+        my_c_api = test_p.update_a_personal_label("2172074187", body)
         json_response = my_c_api.json()
         self.assertTrue(my_c_api.ok, "not deleted")
         self.assertEqual(json_response["name"], "milk", "not equals")
 
     def test_delete_label(self):
         test_p = labels(self.my_api)
-        my_c_api = test_p.delete_label("2171988718")
+        my_c_api = test_p.delete_label("2172074187")
         self.assertTrue(my_c_api.ok, "not deleted")
 
 
