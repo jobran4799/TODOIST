@@ -3,7 +3,7 @@ import json
 import unittest
 from concurrent.futures import ThreadPoolExecutor
 from infra.UI.Brawser_Wrapper import BrowserWrapper
-from tests.api_parallel_tests import api_parallel_tests
+from api_parallel_tests import api_parallel_tests
 
 try:
     with open('../../config.json') as f:
