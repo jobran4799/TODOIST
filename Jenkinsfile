@@ -15,6 +15,23 @@ pipeline {
                 }
             }
         }
+        stage('Setup Selenium Server HUB') {
+            steps {
+                echo 'Setting up Selenium server HUB...'
+                bat "start /B java -jar selenium-server.jar hub"
+                // Delay for 10 seconds
+                bat 'ping 127.0.0.1 -n 11 > nul' // Windows command to sleep for 10 seconds
+            }
+        }
+
+        stage('Setup Selenium Server nodes') {
+            steps {
+                echo 'Setting up Selenium server nodes...'
+                bat "start /B java -jar selenium-server.jar node --port 5555 --selenium-manager true"
+                // Delay for 10 seconds
+                bat 'ping 127.0.0.1 -n 11 > nul' // Windows command to sleep for 10 seconds
+            }
+        }
 
         stage('Run Tests in Parallel') {
             steps {
