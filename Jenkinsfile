@@ -2,39 +2,31 @@ pipeline {
     agent any
 
     environment {
-        PIP_PATH = 'C:\Users\pc-admin\AppData\Local\Programs\Python\Python312\python.exe'
-        PYTHON_PATH = 'C:\Users\pc-admin\AppData\Local\Microsoft\WindowsApps\python.exe'
+        // Define the Docker image name
+        IMAGE_NAME = 'tests'
+        TAG = 'latest'
     }
 
     stages {
-        stage('Setup Environment') {
+        stage('Build Docker Image') {
             steps {
-                echo '$path'
-                echo 'Setting up Python environment...'
-                bat 'C:\Users\pc-admin\AppData\Local\Programs\Python\Python312\python.exe -m venv venv'
-                bat 'venv\\Scripts\\python.exe -m pip install --upgrade pip'
-                bat 'venv\\Scripts\\pip.exe install -r requirements.txt'
+                script {
+                    def customImage = docker.build("${IMAGE_NAME}:${TAG}")
+                }
             }
         }
 
-        stage('Build') {
+        stage('Run API Test') {
             steps {
-                echo 'Building..'
-                // Your build steps here
+                bat "docker run --name api_test_runner ${IMAGE_NAME}:${TAG} python api_test_runner.py"
+                bat "docker rm api_test_runner"
             }
         }
 
-        stage('Test') {
+        stage('Run Add Food to Meal Test') {
             steps {
-                echo 'Testing..'
-                bat "venv\\Scripts\\python.exe -m unittest tests/API/api_tasks_tests.py"
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploying..'
-                // Your deployment steps here
+                bat "docker run --name add_food_to_meal_test_runner ${IMAGE_NAME}:${TAG} python add_food_to_meal_test_runner.py"
+                bat "docker rm add_food_to_meal_test_runner"
             }
         }
     }
@@ -42,17 +34,7 @@ pipeline {
     post {
         always {
             echo 'Cleaning up...'
-            bat "rd /s /q venv"
-        }
-
-        success {
-            echo 'Build succeeded.'
-            // Additional steps for successful build
-        }
-
-        failure {
-            echo 'Build failed.'
-            // Additional steps for failed build
+            bat "docker rmi ${IMAGE_NAME}:${TAG}"
         }
     }
 }
