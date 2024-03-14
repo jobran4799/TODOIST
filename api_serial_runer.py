@@ -4,7 +4,7 @@ import os
 from os.path import dirname as up
 import unittest
 from infra.UI.Brawser_Wrapper import BrowserWrapper
-from api_parallel_tests import api_parallel_tests
+from tests.API.api_parallel_tests import api_parallel_tests
 
 # try:
 #     with open('../../config.json') as f:
