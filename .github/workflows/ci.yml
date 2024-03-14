@@ -24,15 +24,11 @@ jobs:
 
     - name: Run UI tests
       run: |
-        # Replace this with your actual command to run UI tests
-          # For example:
-          python tests_example_run.py
+        python tests_example_run.py
 
 
     - name: Run API tests
       run: |
-        # Replace this with your actual command to run API tests
-        # For example:
         python api_tasks_tests.py
 #name: Continuous Integration
 #
