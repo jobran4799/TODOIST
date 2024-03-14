@@ -12,5 +12,5 @@
   "url_sections_api": "https://api.todoist.com/rest/v2/sections",
   "url_tasks_api": "https://api.todoist.com/rest/v2/tasks",
   "url_label_api": "https://api.todoist.com/rest/v2/labels",
-  "headless": true
+  "headless": false
 }

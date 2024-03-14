@@ -19,6 +19,10 @@ class BrowserWrapper:
     def get_driver(self, brawser):
         if data["headless"]:
             self.headless_get_driver(brawser)
+            url = data["url"]
+            self.driver.get(url)
+            time.sleep(4)
+            return self.driver
         elif data["grid"]:
             if brawser.lower() == 'chrome':
                 options = webdriver.ChromeOptions()
