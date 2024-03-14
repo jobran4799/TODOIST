@@ -18,15 +18,15 @@ pipeline {
 
         stage('Run API Test') {
             steps {
-                bat "docker run --name api_test_runner ${IMAGE_NAME}:${TAG} python api_test_runner.py"
-                bat "docker rm api_test_runner"
+                bat "docker run --name api_tasks_tests ${IMAGE_NAME}:${TAG} python api_tasks_tests.py"
+                bat "docker rm api_tasks_tests"
             }
         }
 
-        stage('Run Add Food to Meal Test') {
+        stage('Run UI Test') {
             steps {
-                bat "docker run --name add_food_to_meal_test_runner ${IMAGE_NAME}:${TAG} python add_food_to_meal_test_runner.py"
-                bat "docker rm add_food_to_meal_test_runner"
+                bat "docker run --name tests_example_run ${IMAGE_NAME}:${TAG} python tests_example_run.py"
+                bat "docker rm tests_example_run"
             }
         }
     }
