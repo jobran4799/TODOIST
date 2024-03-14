@@ -22,12 +22,14 @@ jobs:
       with:
         chrome-version: latest
 
-    - name: Run UI tests
-      run: |
-        python tests_example_run.py
-
-
     - name: Run API tests
       run: |
         python api_tests.py
+
+    - name: Run UI tests
+      run: |
+        python Test_Runer.py
+
+
+    
 
