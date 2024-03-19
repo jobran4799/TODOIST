@@ -37,6 +37,8 @@ class MainPage(BasePage):
     ADD_PROJECT_TO_FAVORITE = (By.XPATH, "//div[contains(@class, '_618235b7') and contains(@class, 'fb8d74bb') and contains(@class, '_18f74af9') and contains(@class, '_68aab614')]/input[@name='is_favorite']")
 
     PROJECT_LIST_BUTTON = (By.XPATH, "//div[contains(@class, 'qMjaCbb') and contains(@class, 'a83bd4e0') and contains(@class, '_7be5c531') and contains(@class, '_6a3e5ade') and contains(@class, '_2f303ac3') and contains(@class, 'fb8d74bb') and contains(@class, '_211eebc7') and text()='My Projects']")
+    PROJECT_NAME = (By.XPATH,
+                    "//ul[@id='projects_list']//span[@class='X_3UwghUggmfmKrS8M8uwnLl4hgJenHE a83bd4e0 _2f303ac3 fb8d74bb _211eebc7' and text()='final project']/ancestor::div[@class='pMTLzg8']")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -235,6 +237,20 @@ class MainPage(BasePage):
         self.find_clicker_to_project_list()
         time.sleep(2)
         self.clicker_button(self.clicker_to_project_list)
+
+
+    # def find_clicker_to_project_list(self):
+    #     self.clicker_to_project_list = self._driver.find_element(*self.PROJECT_LIST_BUTTON)
+
+    def find_project_name(self):
+        self.find_project_name = self._driver.find_element(*self.PROJECT_NAME)
+
+    def find_project(self):
+        self.find_clicker_to_project_list()
+        time.sleep(2)
+        self.clicker_button(self.clicker_to_project_list)
+        time.sleep(2)
+        self.find_project_name()
 
 
 

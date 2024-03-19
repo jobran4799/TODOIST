@@ -22,11 +22,11 @@ jobs:
       with:
         chrome-version: latest
 
-    - name: Run API tests
-      run: python api_serial_runer.py
+    - name: Run API UI tests
+      run: api_parallel_tests.py
 
-    - name: Run UI tests
-      run: python Test_Runer.py
+#    - name: Run UI tests
+#      run: python Test_Runer.py
 
 
     
