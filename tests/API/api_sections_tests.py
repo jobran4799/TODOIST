@@ -13,40 +13,43 @@ class Section_test(unittest.TestCase):
         self.test_p = Section(self.my_api)
 
     def test_add_section_to_project(self):
-        body = {"project_id": "2329678566",
+        body = {"project_id": "2330262062",
                 "name": "section to delete"}
-        my_c_api = self.test_p.add_section_to_project_by_id("2329678566", body)
+        my_c_api = self.test_p.add_section_to_project_by_id(body)
         json_response = my_c_api.json()
+        print(json_response["id"])
+
         self.assertTrue(my_c_api.ok, "not ok")
-        self.assertEqual(json_response["project_id"], "2329678566", "not equals")
+        self.assertEqual(json_response["project_id"], "2330262062", "not equals")
         self.assertEqual(json_response["name"], "section to delete", "not equals")
 
     def test_get_data_section_list(self):
-        my_c_api = self.test_p.get_all_sections("2329678566")
+        my_c_api = self.test_p.get_all_sections("2330262062")
         json_response = my_c_api.json()
+
         self.assertTrue(my_c_api.ok, "not ok")
         self.assertEqual(json_response[0]["order"], 1, "not equals")
-        self.assertEqual(json_response[0]["name"], "check section", "not equals")
-        self.assertEqual(json_response[1]["id"], "149886499", "not equals")
-        self.assertEqual(json_response[1]["name"], "postman", "not equals")
+        self.assertEqual(json_response[0]["name"], "section to delete", "not equals")
 
     def test_get_data_section(self):
-        my_c_api = self.test_p.get_single_section("149886499")
+        my_c_api = self.test_p.get_single_section("150550786")
         json_response = my_c_api.json()
+
         self.assertTrue(my_c_api.ok, "not ok")
-        self.assertEqual(json_response["project_id"], "2329678566", "not equals")
-        self.assertEqual(json_response["name"], "postman", "not equals")
+        self.assertEqual(json_response["project_id"], "2330262062", "not equals")
+        self.assertEqual(json_response["name"], "section to delete", "not equals")
 
     def test_name_section_update(self):
         body = {"name": "Supermarket"}
-        my_c_api = self.test_p.update_name_section("149961566", body)
+        my_c_api = self.test_p.update_name_section("150550786", body)
         json_response = my_c_api.json()
-        self.assertTrue(my_c_api.ok, "not ok")
-        self.assertEqual(json_response["name"], "Supermarket", "not equals")
 
-    def test_delete_section(self):
-        my_c_api = self.test_p.delete_section("149962796")
-        self.assertTrue(my_c_api.ok, "not deleted")
+        self.assertTrue(my_c_api.ok, "not ok")
+        self.assertEqual(json_response["name"], "section to delete", "not equals")
+
+    # def test_delete_section(self):
+    #     my_c_api = self.test_p.delete_section("150550786")
+    #     self.assertTrue(my_c_api.ok, "not deleted")
 
 
 

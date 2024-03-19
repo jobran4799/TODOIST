@@ -19,9 +19,8 @@ class Section:
 
 
 
-    def add_section_to_project_by_id(self, id, section_name_body):
-        id_to_send = f"?id={id}"
-        res = self.my_api.make_post_request_with_id(self.data["url_sections_api"], id_to_send, data=section_name_body)
+    def add_section_to_project_by_id(self, section_name_body):
+        res = self.my_api.make_post_request(self.data["url_sections_api"], data=section_name_body)
         return res
 
     def get_all_sections(self, id):

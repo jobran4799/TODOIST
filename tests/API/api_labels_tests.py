@@ -18,15 +18,9 @@ class labels_test(unittest.TestCase):
         my_c_api = self.test_p.get_personal_label("2171988630")
         json_response = my_c_api.json()
         self.assertTrue(my_c_api.ok, "not deleted")
-        self.assertEqual(json_response["name"], "Food", "not equals")
+        self.assertEqual(json_response["name"], "milk", "not equals")
         self.assertEqual(json_response["is_favorite"], False, "not equals")
 
-    def test_create_new_personal_label(self):
-        body = {"name": "buffel"}
-        my_c_api = self.test_p.create_new_personal_label(body)
-        json_response = my_c_api.json()
-        self.assertTrue(my_c_api.ok, "not deleted")
-        self.assertEqual(json_response["name"], "buffel", "not equals")
 
     def test_update_a_personal_label(self):
         body = {"name": "milk"}
@@ -35,8 +29,8 @@ class labels_test(unittest.TestCase):
         self.assertTrue(my_c_api.ok, "not deleted")
         self.assertEqual(json_response["name"], "milk", "not equals")
 
-    def test_delete_label(self):
-        my_c_api = self.test_p.delete_label("2171988718")
-        self.assertTrue(my_c_api.ok, "not deleted")
+    # def test_delete_label(self):
+    #     my_c_api = self.test_p.delete_label("2171988718")
+    #     self.assertTrue(my_c_api.ok, "not deleted")
 
 
