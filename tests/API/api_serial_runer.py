@@ -24,7 +24,7 @@ if __name__ == "__main__":
     browser_wrapper = BrowserWrapper()
     # cur_dir = os.path.abspath(__file__)
     # config_location = os.path.join(cur_dir, 'config.json')
-    with open('config.json') as f:
+    with open('../../config.json') as f:
         data = json.load(f)
     parallel = data["parallel"]
     serial = data["serial"]

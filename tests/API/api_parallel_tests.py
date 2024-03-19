@@ -1,8 +1,5 @@
-# This is a sample Python script.
-import unittest
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import unittest
 from infra.API.API_wrapper import APIWrapper
 from infra.UI.Brawser_Wrapper import BrowserWrapper
 from logic.API.API_projects import Project

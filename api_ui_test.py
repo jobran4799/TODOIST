@@ -1,7 +1,7 @@
 import json
 import unittest
 
-from api_parallel_tests import api_parallel_tests
+from tests.API.api_parallel_tests import api_parallel_tests
 from infra.UI.Brawser_Wrapper import BrowserWrapper
 
 
