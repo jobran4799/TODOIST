@@ -23,7 +23,7 @@ jobs:
         chrome-version: latest
 
     - name: Run API UI tests
-      run: api_parallel_tests.py
+      run: api_ui_test.py
 
 #    - name: Run UI tests
 #      run: python Test_Runer.py
