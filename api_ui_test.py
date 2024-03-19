@@ -1,8 +1,9 @@
 import json
 import unittest
 
-from infra.UI.Brawser_Wrapper import BrowserWrapper
 from api_parallel_tests import api_parallel_tests
+from infra.UI.Brawser_Wrapper import BrowserWrapper
+
 
 list_test_cases_runer = [api_parallel_tests]
 # test_project_api, test_ui_project]

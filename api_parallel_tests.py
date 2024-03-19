@@ -5,13 +5,9 @@ import unittest
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 from infra.API.API_wrapper import APIWrapper
 from infra.UI.Brawser_Wrapper import BrowserWrapper
-from logic.API.API_labels import labels
 from logic.API.API_projects import Project
-from logic.API.API_sections import Section
-from logic.API.API_tasks import Tasks
 from logic.UI.Log_in_page import LoginPage
 from logic.UI.Main_page import MainPage
-from ui_add_project import MainPage2
 
 
 class api_parallel_tests(unittest.TestCase):
