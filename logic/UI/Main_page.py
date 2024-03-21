@@ -1,8 +1,6 @@
 import time
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from infra.UI.Base_Page import BasePage
 
 
@@ -35,7 +33,6 @@ class MainPage(BasePage):
     CHOOSE_DATE = (By.XPATH, "//button[@aria-label='2024-04-04']")
 
     FIND_COMPLETE_TASK = (By.XPATH, "//div[contains(@class, '_560c1e08')]/div[contains(@class, 'task_content') and text()='test Completed task']")
-    SET_AS_COMPLETE = (By.XPATH,  "//button[@class='task_checkbox qfNv_xy priority_4 U7ZSQdu YGJQoir']")
 
     FIND_MY_PROJECTS = (By.XPATH, "//button[@aria-label='My projects menu']")
     FIND_CLICKER_TO_ADD_PROJECT = (By.XPATH, "//div[@class='a83bd4e0 e214ff2e fb8d74bb' and text()='Add project']")
@@ -197,14 +194,14 @@ class MainPage(BasePage):
     def find_task_complition(self):
         self.find_completed_task = self._driver.find_element(*self.FIND_COMPLETE_TASK)
 
-    def find_click_completed(self):
-        self.completed_task = self._driver.find_element(*self.SET_AS_COMPLETE)
+    def find_click_completed(self,task_name):
+        self.completed_task = self._driver.find_element((By.XPATH,  f'//div[./div[./div[./div[./div[./div[contains(text(),"{task_name}")]]]]]]//button'))
 
-    def set_complation_task(self):
+    def set_complation_task(self,task_name):
         self.find_task_complition()
         self.actions_perform(self.find_completed_task)
         time.sleep(2)
-        self.find_click_completed()
+        self.find_click_completed(task_name)
         time.sleep(2)
         self.clicker_button(self.completed_task)
 
