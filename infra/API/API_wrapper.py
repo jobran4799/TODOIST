@@ -22,7 +22,6 @@ class APIWrapper:
 
     def api_get_request(self, url):
         self.response = self.myrequest.get(url, headers={"Authorization": self.data_config["Authorization"]})
-        print(self.response.status_code)
         if self.response.ok:
             return self.response
         else:

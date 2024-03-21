@@ -18,6 +18,10 @@ class Project:
             self.data = json.load(f)
 
 
+    def get_all_project(self):
+        res = self.my_api.api_get_request(self.data["url_projects_api"])
+        return res
+
     def get_project_by_id(self, id):
         id_to_send = f"?id={id}"
         res = self.my_api.api_get_request_by_id(self.data["url_projects_api"], id_to_send)

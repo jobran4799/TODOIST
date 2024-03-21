@@ -1,16 +1,19 @@
 import time
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import wait
+
 from infra.UI.Base_Page import BasePage
 
 
 class MainPage(BasePage):
     USER_NAME =(By.XPATH, "//span[text() = 'Beyonddev']")
 
-    TASK_INPUT = (By.XPATH, "//div[@class='fb8d74bb _14423c92 _297575f4 c4a9b3ab _5f8879d9']//button [@tabindex='0']")
+    TASK_INPUT = (By.XPATH, "//button[@class='vZhNClH _8313bd46 f169a390 _5e45d59f fb8d74bb _8c75067a']")
+                  # "//div[@class='fb8d74bb _14423c92 _297575f4 c4a9b3ab _5f8879d9']//button [@tabindex='0']")
     ADD_TASK_NAME = (By.XPATH, "//div[@class = 'UjpFDa7 no-focus-marker XOgsZVX']//p[@class='is-empty is-editor-empty']")
 
-    DELETION_INPUT = (By.XPATH,"//div[contains(@class, '_560c1e08')]/div[contains(@class, 'task_content') and text()='test on todoist task']")
+    DELETION_INPUT = (By.XPATH,"//div[@data-index='0']")
     MORE_MENU = (By.XPATH,"//div/div/button[@data-testid='more_menu']")
     DELETE_REQUST = (By.XPATH,"// div[ @class ='a83bd4e0 a8d37c6e _2f303ac3 fb8d74bb _211eebc7' and text()='Delete']")
     CONFIRMATION_DELETE = (By.XPATH, "//form/footer/div/button[./span[contains(text(),'Delete')]]")
@@ -24,12 +27,12 @@ class MainPage(BasePage):
     MENU_FOR_PRIORITY = (By.XPATH, "//div/div/button[@data-testid='more_menu']")
     NUM_PRIORITY = (By.XPATH, "//div[@class='fb8d74bb _14423c92 c7813d79 _6a4f69f7 _5f8879d9 _43e5f8e9']/button[@aria-label='Priority 2']")
 
-    FIND_SET_DUE_DATE = (By.XPATH,"//div[contains(@class, '_560c1e08')]/div[contains(@class, 'task_content') and text()='task set due data']")
-    CLICK_ON_DUE_DATE = (By.XPATH, "//div[@class='YjMLlDP task_list_item__actions task_list_item__actions--active']/button[@aria-label='Due date']")
-    CHOOSE_DATE = (By.XPATH, "//span[@class='calendar__day__date__number' and text()= 8]")
+    FIND_SET_DUE_DATE = (By.XPATH,"//div[@class='task_content' and text()='task set due data']")
+    CLICK_ON_DUE_DATE = (By.XPATH, "//div[contains(@class, 'task_list_item__content') and .//div[text()='task set due data']]//button[@class='due_date_controls']")
+    CHOOSE_DATE = (By.XPATH, "//button[@aria-label='2024-04-04']")
 
     FIND_COMPLETE_TASK = (By.XPATH, "//div[contains(@class, '_560c1e08')]/div[contains(@class, 'task_content') and text()='test Completed task']")
-    SET_AS_COMPLETE = (By.XPATH,  "//button[@class='task_checkbox qfNv_xy priority_1 VlPtS9Y YGJQoir']")
+    SET_AS_COMPLETE = (By.XPATH,  "//button[@class='task_checkbox qfNv_xy priority_4 U7ZSQdu YGJQoir']")
 
     FIND_MY_PROJECTS = (By.XPATH,"//button[@aria-label='My projects menu']")
     FIND_CLICKER_TO_ADD_PROJECT = (By.XPATH, "//div[@class='a83bd4e0 e214ff2e fb8d74bb' and text()='Add project']")
@@ -197,60 +200,6 @@ class MainPage(BasePage):
         self.find_click_completed()
         time.sleep(2)
         self.clicker_button(self.completed_task)
-
-    def find_projects_list(self):
-        self.project_list = self._driver.find_element(*self.FIND_MY_PROJECTS)
-
-    def find_add_project_clicker(self):
-        self.clicker_add_project = self._driver.find_element(*self.FIND_CLICKER_TO_ADD_PROJECT)
-
-    def find_input_project_name(self):
-        self.input_project_name = self._driver.find_element(*self.INPUT_TEXT_ADD_PROJECT)
-
-    def find_clicker_to_favorite(self):
-        self.add_project_to_favorite = self._driver.find_element(*self.ADD_PROJECT_TO_FAVORITE)
-
-    def action_prform_clicker(self, add_to_favorite):
-        actions = ActionChains(self._driver)
-        actions.move_to_element(add_to_favorite).click().perform()
-
-    def create_project(self, text_task_name, add_to_favorite):
-        self.find_projects_list()
-        self.clicker_button(self.project_list)
-        time.sleep(2)
-        self.find_add_project_clicker()
-        self.clicker_button(self.clicker_add_project)
-        time.sleep(2)
-        self.find_input_project_name()
-        self.fill_input(self.input_project_name, text_task_name)
-        time.sleep(2)
-        if add_to_favorite:
-            self.find_clicker_to_favorite()
-            self.action_prform_clicker(self.add_project_to_favorite)
-        time.sleep(2)
-        self.click_enter(self.input_project_name)
-
-    def find_clicker_to_project_list(self):
-        self.clicker_to_project_list = self._driver.find_element(*self.PROJECT_LIST_BUTTON)
-
-    def delete_project(self):
-        self.find_clicker_to_project_list()
-        time.sleep(2)
-        self.clicker_button(self.clicker_to_project_list)
-
-
-    # def find_clicker_to_project_list(self):
-    #     self.clicker_to_project_list = self._driver.find_element(*self.PROJECT_LIST_BUTTON)
-
-    def find_project_name(self):
-        self.find_project_name = self._driver.find_element(*self.PROJECT_NAME)
-
-    def find_project(self):
-        self.find_clicker_to_project_list()
-        time.sleep(2)
-        self.clicker_button(self.clicker_to_project_list)
-        time.sleep(2)
-        self.find_project_name()
 
 
 

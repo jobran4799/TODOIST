@@ -4,7 +4,8 @@ import unittest
 from infra.UI.Brawser_Wrapper import BrowserWrapper
 from logic.UI.Log_in_page import LoginPage
 from logic.UI.Main_page import MainPage
-from ui_add_project import MainPage2
+
+
 
 
 class test_example(unittest.TestCase):
@@ -39,7 +40,7 @@ class test_example(unittest.TestCase):
     def test_Project_to_find(self):
         login = LoginPage(self.driver)
         login.fllow_log_in_test("beyonddevtestproject@gmail.com", "Zxcvbnm123")
-        main_page = MainPage2(self.driver)
+        main_page = MainPage(self.driver)
         main_page.find_project()
         self.assertTrue(main_page, "No match between the tasks name")
 
