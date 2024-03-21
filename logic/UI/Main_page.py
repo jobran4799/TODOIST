@@ -63,14 +63,14 @@ class MainPage(BasePage):
         time.sleep(2)
 
     def click_enter(self, write_input):
-        WebDriverWait(self._driver, 10).until(
-            EC.presence_of_element_located(write_input))
+        # WebDriverWait(self._driver, 10).until(
+        #     EC.presence_of_element_located(write_input))
         write_input.send_keys(Keys.ENTER)
 
 
     def clicker_button(self, click):
-        WebDriverWait(self._driver, 10).until(
-            EC.element_to_be_clickable(click))
+        # WebDriverWait(self._driver, 10).until(
+        #     EC.element_to_be_clickable(click))
         click.click()
 
 

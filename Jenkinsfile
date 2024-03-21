@@ -38,8 +38,8 @@ pipeline {
                 script {
                     parallel(
                         'API Test': {
-                            bat "docker run --name api_parallel_tests ${IMAGE_NAME}:${TAG} python api_parallel_tests.py"
-                            bat "docker rm api_parallel_tests"
+                            bat "docker run --name tests_example_run ${IMAGE_NAME}:${TAG} python tests_example_run.py"
+                            bat "docker rm tests_example_run"
                         },
                         'tests_example_run': {
                             bat "docker run --name Test_Runer ${IMAGE_NAME}:${TAG} python Test_Runer.py"
