@@ -15,7 +15,7 @@ except FileNotFoundError:
     print("Error: 'config.json' file not found. Make sure the file exists in the correct location.")
     raise  # Raise the error to halt execution if the file is essential for the script to run
 
-list_test_cases_runer = [ Main_page_test]
+list_test_cases_runer = [Main_page_test]
                          # Login_page_test,Project_List_Page_Test]
 def test_brawser_runer(browser):
     for test_cases in list_test_cases_runer:
