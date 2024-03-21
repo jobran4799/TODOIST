@@ -42,7 +42,7 @@ class Projects_tests(unittest.TestCase):
         json_response = my_c_api.json()
         self.assertTrue(my_c_api.ok, "not ok")
         self.assertEqual(json_response[0]["color"], "charcoal", "not equals")
-        self.assertEqual(json_response[2]["name"], "Project task", "not equals")
+        self.assertEqual(json_response[-1]["name"], "Project task", "not equals")
 
     def test_get_all_collaborators(self):
         body = {"name": "Project collaborators"}

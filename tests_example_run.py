@@ -3,6 +3,9 @@ import json
 import unittest
 
 from infra.UI.Brawser_Wrapper import BrowserWrapper
+from tests.UI.Log_In_Page_Test import Login_page_test
+from tests.UI.Main_Page_Test import Main_page_test
+from tests.UI.Projects_List_Page_Test import Project_List_Page_Test
 from tests.UI.test_exampel import test_example
 
 try:
@@ -12,7 +15,7 @@ except FileNotFoundError:
     print("Error: 'config.json' file not found. Make sure the file exists in the correct location.")
     raise  # Raise the error to halt execution if the file is essential for the script to run
 
-list_test_cases_runer = [test_example]
+list_test_cases_runer = [Login_page_test, Main_page_test, Project_List_Page_Test]
 def test_brawser_runer(browser):
     for test_cases in list_test_cases_runer:
         test_cases.browser = browser
