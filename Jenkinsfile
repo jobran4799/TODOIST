@@ -1,35 +1,36 @@
 pipeline {
     agent any
 
+
+
     stages {
-        stage('Setup Selenium Server HUB') {
+        stage('Setup Environment') {
             steps {
-                echo 'Setting up Selenium server HUB...'
-                // Download Selenium Server JAR
-                sh 'curl -O https://selenium-release.storage.googleapis.com/4.0-beta-4/selenium-server-4.0.0-beta-4.jar'
-                // Start Selenium Server HUB
-                sh 'java -jar selenium-server-4.0.0-beta-4.jar hub &'
-                // Delay for 10 seconds
-                sh 'sleep 10'
+                echo '$path'
+                echo 'Setting up Python environment...'
+                bat 'C:\\Python\\Python312\\python.exe -m venv venv'
+                bat 'venv\\Scripts\\pip.exe install -r requirements.txt'
             }
         }
 
-        stage('Setup Selenium Server nodes') {
+        stage('Build') {
             steps {
-                echo 'Setting up Selenium server nodes...'
-                // Start Selenium Server Node
-                sh 'java -jar selenium-server-4.0.0-beta-4.jar node --port 5555 --selenium-manager true &'
-                // Delay for 10 seconds
-                sh 'sleep 10'
+                echo 'Building..'
+                // Your build steps here
             }
         }
 
-        stage('Run Tests') {
+        stage('Test') {
             steps {
-                echo 'Running tests...'
-                // Run your tests here
-                sh 'python tests_example_run.py'
-                sh 'python Test_Runer.py'
+                echo 'Testing..'
+                bat "venv\\Scripts\\python.exe tests_example_run.py"
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying..'
+                // Your deployment steps here
             }
         }
     }
@@ -37,7 +38,17 @@ pipeline {
     post {
         always {
             echo 'Cleaning up...'
-            // You can add cleanup steps here if needed
+            bat "rd /s /q venv"
+        }
+
+        success {
+            echo 'Build succeeded.'
+            // Additional steps for successful build
+        }
+
+        failure {
+            echo 'Build failed.'
+            // Additional steps for failed build
         }
     }
 }
