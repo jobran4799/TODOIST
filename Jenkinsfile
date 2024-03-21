@@ -8,13 +8,7 @@ pipeline {
     }
 
     stages {
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    def customImage = docker.build("${IMAGE_NAME}:${TAG}")
-                }
-            }
-        }
+
         stage('Setup Selenium Server HUB') {
             steps {
                 echo 'Setting up Selenium server HUB...'
