@@ -55,15 +55,15 @@ class Main_page_test(unittest.TestCase):
         self.assertTrue(main_page, "task is not completed")
         # Wait for the task to be added
 
-    # def test_Task_editing(self):
-    #     body = {"content": "test task editing", "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
-    #     my_c_api = self.test_p.create_tasks(body)
-    #     json_response = my_c_api.json()
-    #     self.ID = json_response["id"]
-    #     main_page = MainPage(self.driver)
-    #     main_page.edit_task("test edit is working")
-    #     time.sleep(2)
-    #     self.assertTrue(main_page, "task is not add descrption")
+    def test_Task_editing(self):
+        body = {"content": "test task editing", "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
+        my_c_api = self.test_p.create_tasks(body)
+        json_response = my_c_api.json()
+        self.ID = json_response["id"]
+        main_page = MainPage(self.driver)
+        main_page.edit_task("test edit is working")
+        time.sleep(2)
+        self.assertTrue(main_page, "task is not add descrption")
 
     # def test_Task_priority(self):
     #     body = {"content": "task to change priority", "due_string": "today at 12:00", "due_lang": "en", "priority": 4}

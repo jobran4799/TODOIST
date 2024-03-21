@@ -191,20 +191,20 @@ class MainPage(BasePage):
         time.sleep(2)
         self.clicker_button(self.choose_date)
 
-    def find_task_complition(self):
-        self.find_completed_task = self._driver.find_element(*self.FIND_COMPLETE_TASK)
+    # def find_task_complition(self):
+    #     self.find_completed_task = self._driver.find_element(*self.FIND_COMPLETE_TASK)
 
     def click_completed_task(self, task_name):
         self.completed_task = self._driver.find_element(By.XPATH,  f"//div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]//button[contains(@class,'task_checkbox')]")
         self.completed_task.click()
 
-    def set_complation_task(self,task_name):
-        self.find_task_complition()
-        self.actions_perform(self.find_completed_task)
-        time.sleep(2)
-        self.find_click_completed(task_name)
-        time.sleep(2)
-        self.clicker_button(self.completed_task)
+    # def set_complation_task(self,task_name):
+    #     self.find_task_complition()
+    #     self.actions_perform(self.find_completed_task)
+    #     time.sleep(2)
+    #     self.find_click_completed(task_name)
+    #     time.sleep(2)
+    #     self.clicker_button(self.completed_task)
 
 
 
