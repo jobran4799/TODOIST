@@ -1,57 +1,48 @@
 pipeline {
     agent any
 
-
-
     stages {
-        stage('Setup Environment') {
+        stage('Preparation') {
             steps {
-                echo '$path'
-                echo 'Setting up Python environment...'
-                bat 'C:\\Python\\Python312\\python.exe -m venv venv'
-                bat 'venv\\Scripts\\pip.exe install -r requirements.txt'
+                // Checkout SCM
+                checkout scm
             }
         }
-
-        stage('Build') {
+        stage('Install Dependencies') {
             steps {
-                echo 'Building..'
-                // Your build steps here
+                // Install Selenium
+                sh '''
+                python3 -m venv venv
+                source venv/bin/activate
+                pip install selenium
+                '''
+                // Download and extract ChromeDriver using curl
+                sh 'curl -O https://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip'
+                sh 'unzip chromedriver_linux64.zip -d /usr/local/bin/'
+                sh 'rm chromedriver_linux64.zip'
+                // Verify ChromeDriver installation
+                sh 'chromedriver --version'
             }
-        }
+    }
 
-        stage('Test') {
+        stage('Run Tests') {
             steps {
-                echo 'Testing..'
-                bat "venv\\Scripts\\python.exe tests_example_run.py"
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploying..'
-                // Your deployment steps here
+                sh '''
+                source venv/bin/activate
+                python3 -m pytest tests_example_run.py
+                '''
             }
         }
     }
-
     post {
         always {
-            echo 'Cleaning up...'
-            bat "rd /s /q venv"
-        }
-
-        success {
-            echo 'Build succeeded.'
-            // Additional steps for successful build
-        }
-
-        failure {
-            echo 'Build failed.'
-            // Additional steps for failed build
+            echo 'Cleaning up'
+            // Clean up any actions necessary after pipeline execution
+            sh 'rm -rf venv'
         }
     }
 }
+
 
 //pipeline {
 //    agent any
