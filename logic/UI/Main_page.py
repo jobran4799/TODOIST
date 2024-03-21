@@ -194,8 +194,9 @@ class MainPage(BasePage):
     def find_task_complition(self):
         self.find_completed_task = self._driver.find_element(*self.FIND_COMPLETE_TASK)
 
-    def find_click_completed(self,task_name):
-        self.completed_task = self._driver.find_element((By.XPATH,  f'//div[./div[./div[./div[./div[./div[contains(text(),"{task_name}")]]]]]]//button'))
+    def click_completed_task(self, task_name):
+        self.completed_task = self._driver.find_element(By.XPATH,  f"//div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]//button[contains(@class,'task_checkbox')]")
+        self.completed_task.click()
 
     def set_complation_task(self,task_name):
         self.find_task_complition()
