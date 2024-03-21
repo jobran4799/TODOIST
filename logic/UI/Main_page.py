@@ -1,28 +1,28 @@
 import time
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import wait
-from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from infra.UI.Base_Page import BasePage
 
 
 class MainPage(BasePage):
-    USER_NAME =(By.XPATH, "//span[text() = 'Beyonddev']")
+    USER_NAME = (By.XPATH, "//span[text() = 'Beyonddev']")
 
     TASK_INPUT = (By.XPATH, "//button[@class='vZhNClH _8313bd46 f169a390 _5e45d59f fb8d74bb _8c75067a']")
                   # "//div[@class='fb8d74bb _14423c92 _297575f4 c4a9b3ab _5f8879d9']//button [@tabindex='0']")
-    ADD_TASK_NAME = (By.XPATH, "//div[@class = 'UjpFDa7 no-focus-marker XOgsZVX']//p[@class='is-empty is-editor-empty']")
+    ADD_TASK_NAME = (By.XPATH,
+                     "//div[@class = 'UjpFDa7 no-focus-marker XOgsZVX']//p[@class='is-empty is-editor-empty']")
 
-    DELETION_INPUT = (By.XPATH,"//div[@data-index='0']")
-    MORE_MENU = (By.XPATH,"//div/div/button[@data-testid='more_menu']")
-    DELETE_REQUST = (By.XPATH,"// div[ @class ='a83bd4e0 a8d37c6e _2f303ac3 fb8d74bb _211eebc7' and text()='Delete']")
+    DELETION_INPUT = (By.XPATH, "//div[@data-index='0']")
+    MORE_MENU = (By.XPATH, "//div/div/button[@data-testid='more_menu']")
+    DELETE_REQUST = (By.XPATH, "// div[ @class ='a83bd4e0 a8d37c6e _2f303ac3 fb8d74bb _211eebc7' and text()='Delete']")
     CONFIRMATION_DELETE = (By.XPATH, "//form/footer/div/button[./span[contains(text(),'Delete')]]")
 
-    TASK_TO_EDIT = (By.XPATH,"//div[contains(@class, '_560c1e08')]/div[contains(@class, 'task_content') and text()='test task editing']")
-    CLIC_ON_EDIT = (By.XPATH,  "//div[@class='YjMLlDP task_list_item__actions task_list_item__actions--active']/button[@aria-label='Edit']")
+    TASK_TO_EDIT = (By.XPATH,
+    "//div[contains(@class, '_560c1e08')]/div[contains(@class, 'task_content') and text()='test task editing']")
+    CLIC_ON_EDIT = (By.XPATH,
+    "//div[@class='YjMLlDP task_list_item__actions task_list_item__actions--active']/button[@aria-label='Edit']")
     ADD_DESCRPTION = (By.XPATH, "//p[@data-placeholder='Description' and contains(@class, 'is-empty') and contains(@class, 'is-editor-empty')]/br[@class='ProseMirror-trailingBreak']")
     CONFIRM_EDIT = (By.XPATH, "//button[@data-testid='task-editor-submit-button']")
 
@@ -30,14 +30,14 @@ class MainPage(BasePage):
     MENU_FOR_PRIORITY = (By.XPATH, "//div/div/button[@data-testid='more_menu']")
     NUM_PRIORITY = (By.XPATH, "//div[@class='fb8d74bb _14423c92 c7813d79 _6a4f69f7 _5f8879d9 _43e5f8e9']/button[@aria-label='Priority 2']")
 
-    FIND_SET_DUE_DATE = (By.XPATH,"//div[@class='task_content' and text()='task set due data']")
+    FIND_SET_DUE_DATE = (By.XPATH, "//div[@class='task_content' and text()='task set due data']")
     CLICK_ON_DUE_DATE = (By.XPATH, "//div[contains(@class, 'task_list_item__content') and .//div[text()='task set due data']]//button[@class='due_date_controls']")
     CHOOSE_DATE = (By.XPATH, "//button[@aria-label='2024-04-04']")
 
     FIND_COMPLETE_TASK = (By.XPATH, "//div[contains(@class, '_560c1e08')]/div[contains(@class, 'task_content') and text()='test Completed task']")
     SET_AS_COMPLETE = (By.XPATH,  "//button[@class='task_checkbox qfNv_xy priority_4 U7ZSQdu YGJQoir']")
 
-    FIND_MY_PROJECTS = (By.XPATH,"//button[@aria-label='My projects menu']")
+    FIND_MY_PROJECTS = (By.XPATH, "//button[@aria-label='My projects menu']")
     FIND_CLICKER_TO_ADD_PROJECT = (By.XPATH, "//div[@class='a83bd4e0 e214ff2e fb8d74bb' and text()='Add project']")
     INPUT_TEXT_ADD_PROJECT = (By.XPATH, "//input[@id='edit_project_modal_field_name']")
     ADD_PROJECT_TO_FAVORITE = (By.XPATH, "//div[contains(@class, '_618235b7') and contains(@class, 'fb8d74bb') and contains(@class, '_18f74af9') and contains(@class, '_68aab614')]/input[@name='is_favorite']")
