@@ -54,9 +54,9 @@ class BrowserWrapper:
     def headless_get_driver(self, brawser):
         option = Options()
         option.add_argument('--headless')
-        option.add_argument('--no--sandbox')
-        option.add_argument('--disable-dev-shm-usage')
-        option.add_argument('--window-size=1920x1080')
+        # option.add_argument('--no--sandbox')
+        # option.add_argument('--disable-dev-shm-usage')
+        # option.add_argument('--window-size=1920x1080')
         if self.data["grid"]:
             if brawser.lower() == 'chrome':
                 options = webdriver.ChromeOptions()
