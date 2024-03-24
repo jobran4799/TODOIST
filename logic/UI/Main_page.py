@@ -38,18 +38,18 @@ class MainPage(BasePage):
         self.add_task_name = self._driver.find_element(By.XPATH, "//div[contains(@aria-label,'Task name')]//p[@data-placeholder='Task name']")
 
     def create_task(self, text_task_name):
-        self.find_task_inputs_to_add_task()
-        self.clicker_button(self.task_input)
+        task_input = WebDriverWait(self._driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH, "//button[contains(text(),'Add task')]"))
+        )
+        task_input.click()
 
         # Wait for the add task name input field to be visible
         self.find_add_task_name_to_add_task()
-        WebDriverWait(self._driver, 20).until(EC.visibility_of_element_located(self.add_task_name))
-        input_field = self._driver.find_element(*self.add_task_name)
-        input_field.send_keys(text_task_name)
+        WebDriverWait(self._driver, 10).until(EC.visibility_of_element_located(self.add_task_name))
+        self.add_task_name.send_keys(text_task_name)
 
         # Perform action only when the input field is ready
-        # input_field = self._driver.find_element(*self.add_task_name)
-        input_field.send_keys(Keys.ENTER)
+        self.add_task_name.send_keys(Keys.ENTER)
 
 
     def find_task_inputs_to_delete_task(self, task_name):
@@ -156,21 +156,22 @@ class MainPage(BasePage):
         self.find_task_for_priority(task_name)
         self.action_perform_hover_over(self.task_for_priority)
 
+        self.find_menu_priority(task_name)
         # Wait for the menu to appear
         WebDriverWait(self._driver, 10).until(EC.visibility_of_element_located((By.XPATH, self.menu_priority.xpath)))
 
         # Find the menu button
-        self.find_menu_priority(task_name)
+
 
         # Click on the menu button
         self.clicker_button_with_retry(self.menu_priority)
 
+        self.find_choose_num_of_priority(priority_level)
         # Wait for the priority option to appear
         WebDriverWait(self._driver, 10).until(
             EC.visibility_of_element_located((By.XPATH, self.confirm_edit_priority.xpath)))
 
         # Find and click on the priority option
-        self.find_choose_num_of_priority(priority_level)
         self.clicker_button(self.confirm_edit_priority)
 
     def find_click_on_due_date(self, task_name):

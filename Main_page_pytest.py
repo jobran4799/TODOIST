@@ -19,7 +19,7 @@ def setup(request):
 
     def teardown():
         if not TestMainPage.ISDELETED:
-            my_c_api = test_p.delete_tasks(TestMainPage.ID)
+            my_c_api = test_p.delete_tasks(*TestMainPage.ID)
         driver.quit()
 
     request.addfinalizer(teardown)
