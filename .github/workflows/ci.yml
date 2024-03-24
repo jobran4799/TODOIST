@@ -10,7 +10,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.8'
+        python-version: '3.12'
 
     - name: Install dependencies
       run: |
@@ -22,11 +22,11 @@ jobs:
       with:
         chrome-version: latest
 
-    - name: Run API UI tests
-      run: python api_ui_test.py
-
-#    - name: Run UI tests
+#    - name: Run API tests
 #      run: python Test_Runer.py
+
+    - name: Run UI tests
+      run: python tests_example_run.py
 
 
     

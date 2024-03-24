@@ -26,9 +26,9 @@ class Tasks:
         res = self.my_api.make_post_request(self.data["url_tasks_api"], body)
         return res
 
-    def update_tasks(self, name, body):
-        name_to_send = f"?content={name}"
-        res = self.my_api.make_post_request_with_id(self.data["url_tasks_api"], name_to_send, body)
+    def update_tasks(self, id, body):
+        id_to_send = f"/{id}"
+        res = self.my_api.make_post_request_with_id(self.data["url_tasks_api"], id_to_send, body)
         return res
 
     def delete_tasks(self, id):
