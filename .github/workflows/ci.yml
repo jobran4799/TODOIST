@@ -21,7 +21,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Setup ChromeDriver
-      uses: browser-actions/setup-chrome@v1
+      uses: browser-actions/setup-chrome@latest
       with:
         chrome-version: latest
 
