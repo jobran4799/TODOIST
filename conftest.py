@@ -1,5 +1,6 @@
 import pytest
 
+from Main_page_pytest import TestMainPage
 from infra.API.API_wrapper import APIWrapper
 from infra.UI.Brawser_Wrapper import BrowserWrapper
 from logic.API.API_tasks import Tasks
@@ -16,6 +17,8 @@ def setup(request):
     login.fllow_log_in_test("beyonddevtestproject@gmail.com", "Zxcvbnm123")
 
     def teardown():
+        if not TestMainPage.ISDELETED:
+            my_c_api = test_p.delete_tasks(TestMainPage.ID)
         driver.quit()
 
     request.addfinalizer(teardown)
