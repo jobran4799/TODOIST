@@ -17,7 +17,7 @@ def setup(request):
     login.fllow_log_in_test("beyonddevtestproject@gmail.com", "Zxcvbnm123")
 
     def teardown():
-        if not TestMainPage.ISDELETED:
+        if not TestMainPage.TODELETED:
             my_c_api = test_p.delete_tasks(TestMainPage.ID)
         driver.quit()
 
