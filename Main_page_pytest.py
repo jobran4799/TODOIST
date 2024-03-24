@@ -1,9 +1,29 @@
 import pytest
 import time
 from selenium.common.exceptions import NoSuchElementException
-
 from infra.utils import Utiles
 from logic.UI.Main_page import MainPage
+from infra.API.API_wrapper import APIWrapper
+from infra.UI.Brawser_Wrapper import BrowserWrapper
+from logic.API.API_tasks import Tasks
+from logic.UI.Log_in_page import LoginPage
+
+@pytest.fixture
+def setup(request):
+    browser_wrapper = BrowserWrapper()
+    driver = browser_wrapper.get_driver("chrome")
+    my_api = APIWrapper()
+    test_p = Tasks(my_api)
+    login = LoginPage(driver)
+    login.fllow_log_in_test("beyonddevtestproject@gmail.com", "Zxcvbnm123")
+
+    def teardown():
+        if not TestMainPage.ISDELETED:
+            my_c_api = test_p.delete_tasks(TestMainPage.ID)
+        driver.quit()
+
+    request.addfinalizer(teardown)
+    return driver, test_p
 
 @pytest.mark.usefixtures("setup")
 class TestMainPage:
@@ -15,7 +35,6 @@ class TestMainPage:
         task_name = Utiles.generate_random_string(5)
         main_page = MainPage(driver)
         main_page.create_task(task_name)
-        main_page = MainPage(driver)
         main_page.create_task(task_name)
 
     @pytest.mark.test_task_compilation

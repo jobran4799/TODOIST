@@ -29,8 +29,8 @@ jobs:
 #    - name: Run API tests
 #      run: python Test_Runer.py
 
-    - name: Run UI tests
-      run: python tests_example_run.py
+#    - name: Run UI tests
+#      run: python tests_example_run.py
 
     - name: Run pytest tests
       run: pytest Main_page_pytest.py --html=report.html
