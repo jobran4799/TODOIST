@@ -150,6 +150,7 @@ class MainPage(BasePage):
     def find_choose_num_of_priority(self, priority_level):
         xpath = f"//button[contains(@aria-label,'Priority {priority_level}')]"
         self.confirm_edit_priority = self._driver.find_element(By.XPATH, xpath)
+        WebDriverWait(self._driver, 10).until(EC.visibility_of_element_located(self.confirm_edit_priority))
 
     def priority_task(self, task_name, priority_level):
         time.sleep(2)
@@ -166,6 +167,7 @@ class MainPage(BasePage):
         # Click on the menu button
         self.clicker_button_with_retry(self.menu_priority)
         time.sleep(2)
+
         self.find_choose_num_of_priority(priority_level)
         # Wait for the priority option to appear
         # WebDriverWait(self._driver, 10).until(
