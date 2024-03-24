@@ -158,7 +158,7 @@ class MainPage(BasePage):
 
         self.find_menu_priority(task_name)
         # Wait for the menu to appear
-        WebDriverWait(self._driver, 10).until(EC.visibility_of_element_located((By.XPATH, self.menu_priority.xpath)))
+        WebDriverWait(self._driver, 10).until(EC.visibility_of_element_located((By.XPATH, self.menu_priority)))
 
         # Find the menu button
 
@@ -169,7 +169,7 @@ class MainPage(BasePage):
         self.find_choose_num_of_priority(priority_level)
         # Wait for the priority option to appear
         WebDriverWait(self._driver, 10).until(
-            EC.visibility_of_element_located((By.XPATH, self.confirm_edit_priority.xpath)))
+            EC.visibility_of_element_located((By.XPATH, self.confirm_edit_priority)))
 
         # Find and click on the priority option
         self.clicker_button(self.confirm_edit_priority)
