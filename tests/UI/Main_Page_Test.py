@@ -85,7 +85,7 @@ class Main_page_test(unittest.TestCase):
         self.ID = json_response["id"]
         main_page = MainPage(self.driver)
         main_page.set_due_date_task(task_name)
-        self.assertTrue(main_page, "data did not be modified")
+        self.assertTrue(main_page, "data did not be modified?")
 
 
     def tearDown(self):

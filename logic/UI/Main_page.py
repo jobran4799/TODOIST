@@ -271,7 +271,7 @@ class MainPage(BasePage):
     #     self.completed_task = self._driver.find_element(By.XPATH,  f"//div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]//button[contains(@class,'task_checkbox')]")
     #     self.completed_task.click()
     def click_completed_task(self, task_name):
-        # Wait for the completed task button to be visible
+        # Wait for the completed task button to be visibled
         completed_task_button = WebDriverWait(self._driver, 10).until(
             EC.element_to_be_clickable(
                 (By.XPATH, f"//button[contains(@class,'task_checkbox') and contains(text(),'{task_name}')]"))
