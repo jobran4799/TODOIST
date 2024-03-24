@@ -115,9 +115,22 @@ class MainPage(BasePage):
     def create_task(self, text_task_name):
         self.find_task_inputs_to_add_task()
         self.clicker_button(self.task_input)
+
+        # Wait for the add task name input field to be visible
         self.find_add_task_name_to_add_task()
+        WebDriverWait(self._driver, 10).until(EC.visibility_of_element_located(self.add_task_name))
+
         self.fill_input(self.add_task_name, text_task_name)
-        self.click_enter(self.add_task_name)
+
+        # Perform action only when the input field is ready
+        input_field = self._driver.find_element(*self.add_task_name)
+        input_field.send_keys(Keys.ENTER)
+    # def create_task(self, text_task_name):
+    #     self.find_task_inputs_to_add_task()
+    #     self.clicker_button(self.task_input)
+    #     self.find_add_task_name_to_add_task()
+    #     self.fill_input(self.add_task_name, text_task_name)
+    #     self.click_enter(self.add_task_name)
 
     def find_task_inputs_to_delete_task(self, task_name):
         self.task_delete_input = self._driver.find_element(By.XPATH,  f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]")
