@@ -11,7 +11,7 @@ from logic.UI.Main_page import MainPage
 class Main_page_test(unittest.TestCase):
     ID = None
     ISDELETED = False
-    def setUp(self):
+    def setup_method(self):
         self.browser_wrapper = BrowserWrapper()
         self.driver = self.browser_wrapper.get_driver("chrome")
         self.my_api = APIWrapper()
@@ -88,7 +88,7 @@ class Main_page_test(unittest.TestCase):
     #     self.assertTrue(main_page, "data did not be modified?")
 
 
-    def tearDown(self):
+    def teardown_method(self):
         if not self.ISDELETED:
             my_c_api = self.test_p.delete_tasks(self.ID)
         self.driver.quit()
