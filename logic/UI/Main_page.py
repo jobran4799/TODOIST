@@ -172,7 +172,7 @@ class MainPage(BasePage):
         print("Failed to click the element after multiple attempts")
 
     def edit_task(self, text_edit):
-        # Click on the task to edit
+        # Click on the task edit
         self.find_task_inputs_to_edit_task(text_edit)
         self.clicker_button_with_retry(self.inputs_to_edit_task)
 
