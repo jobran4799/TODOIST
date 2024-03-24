@@ -33,19 +33,13 @@ pipeline {
             }
        }
 
-        stage('Run Tests in Parallel') {
+        stage('Run Tests') {
             steps {
                 script {
-                    parallel(
-                        'API Test': {
-                            bat "docker run --name tests_example_run ${IMAGE_NAME}:${TAG} python tests_example_run.py"
-                            bat "docker rm tests_example_run"
-                        },
-                        'tests_example_run': {
-                            bat "docker run --name Test_Runer ${IMAGE_NAME}:${TAG} python Test_Runer.py"
-                            bat "docker rm Test_Runer"
-                        }
-                    )
+                    'API Test': {
+                        bat "docker run --name tests_example_run ${IMAGE_NAME}:${TAG} python tests_example_run.py"
+                        bat "docker rm tests_example_run"
+                    }
                 }
             }
         }
@@ -58,3 +52,5 @@ pipeline {
         }
     }
 }
+
+

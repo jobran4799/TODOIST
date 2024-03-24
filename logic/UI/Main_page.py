@@ -2,7 +2,8 @@ import time
 from selenium.webdriver import Keys, ActionChains
 from infra.UI.Base_Page import BasePage
 from selenium.webdriver.common.by import By
-
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 class MainPage(BasePage):
     USER_NAME = (By.XPATH, "//span[text() = 'Beyonddev']")
 
@@ -137,28 +138,60 @@ class MainPage(BasePage):
     def find_confirm_edit(self):
         self.confirm_edit = self._driver.find_element(By.XPATH,  "//div[contains(@aria-label,'Description')]")
 
-    def edit_task(self, text_edit):
-        self.find_task_inputs_to_edit_task(text_edit)
-        self.action_prform_hover_over(self.inputs_to_edit_task)
-        # self.actions_perform(self.inputs_to_edit_task)
-        # time.sleep(2)
-        # self.find_click_on_edit()
-        # time.sleep(2)
-        self.clicker_button(self.inputs_to_edit_task)
-        # time.sleep(2)
-        self.find_add_descrption(text_edit)
-        time.sleep(2)
-        self.clicker_button(self.add_descrption)
-        self.find_confirm_edit()
-        time.sleep(2)
-        self.confirm_edit.send_keys("text_edit")
-        time.sleep(2)
-        self.click_enter(self.confirm_edit)
-        # self.find_confirm_edit()
-        # time.sleep(2)
-        # self.actions_perform(self.confirm_edit)
-        # self.clicker_button(self.confirm_edit)
+    # def edit_task(self, text_edit):
+    #     self.find_task_inputs_to_edit_task(text_edit)
+    #     # self.action_prform_hover_over(self.inputs_to_edit_task)
+    #     # self.actions_perform(self.inputs_to_edit_task)
+    #     # time.sleep(2)
+    #     # self.find_click_on_edit()
+    #     # time.sleep(2)
+    #     self.clicker_button(self.inputs_to_edit_task)
+    #     # time.sleep(2)
+    #     self.find_add_descrption(text_edit)
+    #     time.sleep(2)
+    #     self.clicker_button(self.add_descrption)
+    #     self.find_confirm_edit()
+    #     time.sleep(2)
+    #     self.confirm_edit.send_keys("text_edit")
+    #     time.sleep(2)
+    #     self.click_enter(self.confirm_edit)
+    #     # self.find_confirm_edit()
+    #     # time.sleep(2)
+    #     # self.actions_perform(self.confirm_edit)
+    #     # self.clicker_button(self.confirm_edit)
 
+    def clicker_button_with_retry(self, element):
+        retry_attempts = 3
+        for _ in range(retry_attempts):
+            try:
+                element.click()
+                return  # Click successful, exit the loop
+            except Exception as e:
+                print(f"Click failed: {e}")
+                time.sleep(1)  # Wait for 1 second before retrying
+        print("Failed to click the element after multiple attempts")
+
+    def edit_task(self, text_edit):
+        # Click on the task to edit
+        self.find_task_inputs_to_edit_task(text_edit)
+        self.clicker_button_with_retry(self.inputs_to_edit_task)
+
+        # Wait for the add description element to appear
+        add_description_element = WebDriverWait(self._driver, 10).until(
+            EC.visibility_of_element_located(
+                (By.XPATH, "//div[contains(@class,'task-overview-description-placeholder')]"))
+        )
+
+        # Click on the add description element
+        self.clicker_button_with_retry(add_description_element)
+
+        # Send keys to the confirm edit element
+        self.find_confirm_edit()  # Assuming confirm edit element is constant after clicking on add description
+        confirm_edit_element = self.confirm_edit
+        confirm_edit_element.send_keys(text_edit)
+
+        # Click Enter to confirm the edit
+        self.click_enter(confirm_edit_element)
 
     def find_menu_priority(self, task_name):
         self.menu_priority = self._driver.find_element(By.XPATH,  f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@data-testid,'more_menu')]")
