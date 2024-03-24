@@ -14,9 +14,9 @@ except FileNotFoundError:
 list_test_cases_runer = [Main_page_test]
 
 
-def test_brawser_runer():
+def test_brawser_runer(browser):
     for test_cases in list_test_cases_runer:
-        # test_cases.browser = browser
+        test_cases.browser = browser
         test_suite = unittest.TestLoader().loadTestsFromTestCase(test_cases)
         print(test_suite)
         unittest.TextTestRunner().run(test_suite)
@@ -25,4 +25,4 @@ def test_brawser_runer():
 if __name__ == "__main__":
     browser_wrapper = BrowserWrapper()
     get_browser = data["browser"]
-    test_brawser_runer()
+    test_brawser_runer(get_browser)

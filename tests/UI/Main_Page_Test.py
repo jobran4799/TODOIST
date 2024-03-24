@@ -12,8 +12,12 @@ class Main_page_test(unittest.TestCase):
     ID = None
     ISDELETED = False
     def setUp(self):
+        self.browser
         self.browser_wrapper = BrowserWrapper()
-        self.driver = self.browser_wrapper.get_driver("chrome")
+        if self.browser:
+            self.driver = self.browser_wrapper.get_driver(self.browser)
+        else:
+            self.driver = self.browser_wrapper.get_driver("chrome")
         self.my_api = APIWrapper()
         self.test_p = Tasks(self.my_api)
         login = LoginPage(self.driver)
