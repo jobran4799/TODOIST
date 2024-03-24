@@ -29,11 +29,11 @@ jobs:
 #    - name: Run API tests
 #      run: python Test_Runer.py
 
-    - name: Run UI tests
-      run: python tests_example_run.py
+#    - name: Run UI tests
+#      run: python tests_example_run.py
 
-#    - name: Run pytest tests
-#      run: pytest tests_example_run.py --html=report.html
+    - name: Run pytest tests
+      run: pytest tests_example_run.py --html=report.html
 
 
 
