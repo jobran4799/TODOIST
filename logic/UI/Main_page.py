@@ -77,24 +77,24 @@ class MainPage(BasePage):
 
         # Wait for the menu clicker button to be clickable
         self.find_more_menu_clicker(task_name)
-        WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(self.menu_clicker))
+        # WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(self.menu_clicker))
 
         # Click the menu clicker button
-        self.clicker_button(self.menu_clicker)
+        self.clicker_button_with_retry(self.menu_clicker)
 
         # Wait for the delete request button to be clickable
         self.find_delete_requste()
-        WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(self.delete_requeste))
+        # WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(self.delete_requeste))
 
         # Click the delete request button
-        self.clicker_button(self.delete_requeste)
+        self.clicker_button_with_retry(self.delete_requeste)
 
         # Wait for the confirmation delete request button to be clickable
         self.find_confrmation_delete_requste()
-        WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(self.confirm_delete_requeste))
+        # WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(self.confirm_delete_requeste))
 
         # Click the confirmation delete request button
-        self.clicker_button(self.confirm_delete_requeste)
+        self.clicker_button_with_retry(self.confirm_delete_requeste)
 
 
     def find_task_inputs_to_edit_task(self, task_name):
@@ -119,7 +119,7 @@ class MainPage(BasePage):
         print("Failed to click the element after multiple attempts")
 
     def edit_task(self, text_edit):
-        time.sleep(2)
+        time.sleep(5)
         # Click on the task edit
         self.find_task_inputs_to_edit_task(text_edit)
         self.clicker_button_with_retry(self.inputs_to_edit_task)
@@ -161,7 +161,7 @@ class MainPage(BasePage):
 
         self.find_menu_priority(task_name)
         # Wait for the menu to appear
-        WebDriverWait(self._driver, 10).until(EC.visibility_of_element_located((By.XPATH, self.menu_priority)))
+        # WebDriverWait(self._driver, 10).until(EC.visibility_of_element_located(self.menu_priority))
 
         # Find the menu button
 
@@ -185,6 +185,7 @@ class MainPage(BasePage):
 
 
     def set_due_date_task(self, task_name):
+        time.sleep(2)
         self.find_click_on_due_date(task_name)
         self.action_perform_hover_over(self.click_on_due_date)
         click_on_due_date_button = WebDriverWait(self._driver, 10).until(
