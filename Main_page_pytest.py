@@ -48,7 +48,7 @@ class TestMainPage:
         json_response = my_c_api.json()
         task_id = json_response["id"]
         main_page = MainPage(driver)
-        main_page.priority_task(task_name)
+        main_page.priority_task(task_name, 3)
 
     def test_Task_deletion(self, setup):
         driver, test_p = setup

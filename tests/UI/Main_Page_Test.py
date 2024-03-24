@@ -74,7 +74,7 @@ class Main_page_test(unittest.TestCase):
         json_response = my_c_api.json()
         self.ID = json_response["id"]
         main_page = MainPage(self.driver)
-        main_page.priority_task(task_name)
+        main_page.priority_task(task_name, 3)
         self.assertTrue(main_page, "priority does not selected")
 
     def test_Task_set_due_data(self):
