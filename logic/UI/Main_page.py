@@ -202,19 +202,42 @@ class MainPage(BasePage):
     def find_choose_num_of_priority(self):
         self.confirm_edit_priority = self._driver.find_element(By.XPATH, "//button[contains(@aria-label,'Priority 3')]")
 
+    # def priority_task(self, task_name):
+    #     self.find_task_for_priority(task_name)
+    #     self.action_prform_hover_over(self.task_for_priority)
+    #     time.sleep(2)
+    #     self.find_menu_priority(task_name)
+    #     time.sleep(2)
+    #     # WebDriverWait(self._driver, 10).until(
+    #     #     EC.element_to_be_clickable(self.task_for_priority))
+    #     self.clicker_button(self.menu_priority)
+    #     time.sleep(2)
+    #     self.actions_perform(self.task_for_priority)
+    #     self.find_choose_num_of_priority()
+    #     time.sleep(2)
+    #     self.clicker_button(self.confirm_edit_priority)
     def priority_task(self, task_name):
         self.find_task_for_priority(task_name)
         self.action_prform_hover_over(self.task_for_priority)
-        time.sleep(2)
+
+        # Wait for the menu to appear
+        WebDriverWait(self._driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH,
+                                              f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@data-testid,'more_menu')]")))
+
+        # Find the menu button
         self.find_menu_priority(task_name)
-        time.sleep(2)
-        # WebDriverWait(self._driver, 10).until(
-        #     EC.element_to_be_clickable(self.task_for_priority))
-        self.clicker_button(self.menu_priority)
-        time.sleep(2)
-        self.actions_perform(self.task_for_priority)
+
+        # Click on the menu button
+        self.clicker_button_with_retry(self.menu_priority)
+
+        # Wait for the priority option to appear
+        WebDriverWait(self._driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH, "//button[contains(@aria-label,'Priority 3')]")
+                                             ))
+
+        # Find and click on the priority option
         self.find_choose_num_of_priority()
-        time.sleep(2)
         self.clicker_button(self.confirm_edit_priority)
 
     def find_task_set_due_date(self, task_name):
@@ -244,9 +267,18 @@ class MainPage(BasePage):
     # def find_task_complition(self):
     #     self.find_completed_task = self._driver.find_element(*self.FIND_COMPLETE_TASK)
 
+    # def click_completed_task(self, task_name):
+    #     self.completed_task = self._driver.find_element(By.XPATH,  f"//div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]//button[contains(@class,'task_checkbox')]")
+    #     self.completed_task.click()
     def click_completed_task(self, task_name):
-        self.completed_task = self._driver.find_element(By.XPATH,  f"//div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]//button[contains(@class,'task_checkbox')]")
-        self.completed_task.click()
+        # Wait for the completed task button to be visible
+        completed_task_button = WebDriverWait(self._driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH,
+                                              f"//div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]//button[contains(@class,'task_checkbox')]"))
+        )
+
+        # Click on the completed task button
+        completed_task_button.click()
 
     # def set_complation_task(self,task_name):
     #     self.find_task_complition()
