@@ -58,7 +58,6 @@ class MainPage(BasePage):
         return self.user_name.is_displayed()
 
     def fill_input(self, task_input, task_TaskName):
-        time.sleep(2)
         task_input.send_keys(task_TaskName)
         time.sleep(2)
 
@@ -83,7 +82,7 @@ class MainPage(BasePage):
         self.task_input = self._driver.find_element(By.XPATH, "//button[contains(text(),'Add task')]")
 
     def find_add_task_name_to_add_task(self):
-        self.add_task_name = self._driver.find_element(By.XPATH, "//div[contains(@aria-label,'Task name')]//p[@data-placeholder='Task name']")
+        self.add_task_name = self._driver.find_element(By.XPATH, "//p[@data-placeholder='Task name']")
 
     def creat_task(self, text_task_name):
         self.find_task_inputs_to_add_task()
