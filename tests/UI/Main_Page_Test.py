@@ -1,62 +1,39 @@
-import unittest
+import pytest
 import time
-from infra.API.API_wrapper import APIWrapper
-from infra.UI.Brawser_Wrapper import BrowserWrapper
+from selenium.common.exceptions import NoSuchElementException
+
 from infra.utils import Utiles
-from logic.API.API_tasks import Tasks
-from logic.UI.Log_in_page import LoginPage
 from logic.UI.Main_page import MainPage
 
 
-class Main_page_test(unittest.TestCase):
+@pytest.mark.usefixtures("setup")
+class TestMainPage:
+
     ID = None
     ISDELETED = False
-    def setup_method(self):
-        self.browser_wrapper = BrowserWrapper()
-        self.driver = self.browser_wrapper.get_driver("chrome")
-        self.my_api = APIWrapper()
-        self.test_p = Tasks(self.my_api)
-        login = LoginPage(self.driver)
-        login.fllow_log_in_test("beyonddevtestproject@gmail.com", "Zxcvbnm123")
 
-    def test_Task_creation(self):
+    def test_task_creation(self):
         task_name = Utiles.generate_random_string(5)
         main_page = MainPage(self.driver)
         main_page.create_task(task_name)
         my_c_api = self.test_p.get_active_tasks()
         json_response = my_c_api.json()
         self.ID = json_response[0]["id"]
-        time.sleep(2)
-        self.assertTrue(main_page, "No match between the tasks name")
+        assert main_page, "No match between the tasks name"
 
-    # def test_Task_deletion(self):
-    #     task_name = Utiles.generate_random_string(5)
-    #     body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
-    #     my_c_api = self.test_p.create_tasks(body)
-    #     json_response = my_c_api.json()
-    #     self.ID = json_response["id"]
-    #     self.ISDELETED = True
-    #     time.sleep(5)
-    #     main_page = MainPage(self.driver)
-    #     main_page.delete_task(task_name)
-    #     time.sleep(2)
-    #     self.assertTrue(main_page, "task is still exist")
-    #
-    def test_Task_compilation(self):
+    @pytest.mark.test_task_compilation
+    def test_task_compilation(self):
         task_name = Utiles.generate_random_string(5)
         body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
         my_c_api = self.test_p.create_tasks(body)
         json_response = my_c_api.json()
         self.ID = json_response["id"]
         self.ISDELETED = True
-        time.sleep(2)
         main_page = MainPage(self.driver)
         main_page.click_completed_task(task_name)
-        time.sleep(2)
-        self.assertTrue(main_page, "task is not completed")
-        # Wait for the task to be added
+        assert main_page, "task is not completed"
 
-    def test_Task_editing(self):
+    def test_task_editing(self):
         task_name = Utiles.generate_random_string(5)
         body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
         my_c_api = self.test_p.create_tasks(body)
@@ -64,10 +41,9 @@ class Main_page_test(unittest.TestCase):
         self.ID = json_response["id"]
         main_page = MainPage(self.driver)
         main_page.edit_task(task_name)
-        time.sleep(2)
-        self.assertTrue(main_page, "task is not add descrption")
+        assert main_page, "task is not add description"
 
-    def test_Task_priority(self):
+    def test_task_priority(self):
         task_name = Utiles.generate_random_string(5)
         body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
         my_c_api = self.test_p.create_tasks(body)
@@ -75,20 +51,104 @@ class Main_page_test(unittest.TestCase):
         self.ID = json_response["id"]
         main_page = MainPage(self.driver)
         main_page.priority_task(task_name)
-        self.assertTrue(main_page, "priority does not selected")
-    #
-    # def test_Task_set_due_data(self):
-    #     task_name = Utiles.generate_random_string(5)
-    #     body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
-    #     my_c_api = self.test_p.create_tasks(body)
-    #     json_response = my_c_api.json()
-    #     self.ID = json_response["id"]
-    #     main_page = MainPage(self.driver)
-    #     main_page.set_due_date_task(task_name)
-    #     self.assertTrue(main_page, "data did not be modified?")
-
+        assert main_page, "priority does not selected"
 
     def teardown_method(self):
         if not self.ISDELETED:
             my_c_api = self.test_p.delete_tasks(self.ID)
         self.driver.quit()
+
+# import unittest
+# import time
+# from infra.API.API_wrapper import APIWrapper
+# from infra.UI.Brawser_Wrapper import BrowserWrapper
+# from infra.utils import Utiles
+# from logic.API.API_tasks import Tasks
+# from logic.UI.Log_in_page import LoginPage
+# from logic.UI.Main_page import MainPage
+#
+#
+# class Main_page_test(unittest.TestCase):
+#     ID = None
+#     ISDELETED = False
+#     def setup_method(self):
+#         self.browser_wrapper = BrowserWrapper()
+#         self.driver = self.browser_wrapper.get_driver("chrome")
+#         self.my_api = APIWrapper()
+#         self.test_p = Tasks(self.my_api)
+#         login = LoginPage(self.driver)
+#         login.fllow_log_in_test("beyonddevtestproject@gmail.com", "Zxcvbnm123")
+#
+#     def test_Task_creation(self):
+#         task_name = Utiles.generate_random_string(5)
+#         main_page = MainPage(self.driver)
+#         main_page.create_task(task_name)
+#         my_c_api = self.test_p.get_active_tasks()
+#         json_response = my_c_api.json()
+#         self.ID = json_response[0]["id"]
+#         time.sleep(2)
+#         self.assertTrue(main_page, "No match between the tasks name")
+#
+#     # def test_Task_deletion(self):
+#     #     task_name = Utiles.generate_random_string(5)
+#     #     body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
+#     #     my_c_api = self.test_p.create_tasks(body)
+#     #     json_response = my_c_api.json()
+#     #     self.ID = json_response["id"]
+#     #     self.ISDELETED = True
+#     #     time.sleep(5)
+#     #     main_page = MainPage(self.driver)
+#     #     main_page.delete_task(task_name)
+#     #     time.sleep(2)
+#     #     self.assertTrue(main_page, "task is still exist")
+#     #
+#     def test_Task_compilation(self):
+#         task_name = Utiles.generate_random_string(5)
+#         body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
+#         my_c_api = self.test_p.create_tasks(body)
+#         json_response = my_c_api.json()
+#         self.ID = json_response["id"]
+#         self.ISDELETED = True
+#         time.sleep(2)
+#         main_page = MainPage(self.driver)
+#         main_page.click_completed_task(task_name)
+#         time.sleep(2)
+#         self.assertTrue(main_page, "task is not completed")
+#         # Wait for the task to be added
+#
+#     def test_Task_editing(self):
+#         task_name = Utiles.generate_random_string(5)
+#         body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
+#         my_c_api = self.test_p.create_tasks(body)
+#         json_response = my_c_api.json()
+#         self.ID = json_response["id"]
+#         main_page = MainPage(self.driver)
+#         main_page.edit_task(task_name)
+#         time.sleep(2)
+#         self.assertTrue(main_page, "task is not add descrption")
+#
+#     def test_Task_priority(self):
+#         task_name = Utiles.generate_random_string(5)
+#         body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
+#         my_c_api = self.test_p.create_tasks(body)
+#         json_response = my_c_api.json()
+#         self.ID = json_response["id"]
+#         main_page = MainPage(self.driver)
+#         main_page.priority_task(task_name)
+#         self.assertTrue(main_page, "priority does not selected")
+#     #
+#     # def test_Task_set_due_data(self):
+#     #     task_name = Utiles.generate_random_string(5)
+#     #     body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
+#     #     my_c_api = self.test_p.create_tasks(body)
+#     #     json_response = my_c_api.json()
+#     #     self.ID = json_response["id"]
+#     #     main_page = MainPage(self.driver)
+#     #     main_page.set_due_date_task(task_name)
+#     #     self.assertTrue(main_page, "data did not be modified?")
+#
+#
+#     def teardown_method(self):
+#         if not self.ISDELETED:
+#             my_c_api = self.test_p.delete_tasks(self.ID)
+#         self.driver.quit()
