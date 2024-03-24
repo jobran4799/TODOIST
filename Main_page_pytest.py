@@ -27,7 +27,9 @@ class TestMainPage:
         main_page.create_task(task_name)
         my_c_api = self.test_p.get_active_tasks()
         json_response = my_c_api.json()
-        self.ID = json_response[0]["id"]
+        for get_id in json_response:
+            if get_id["content"] == task_name:
+                self.ID = get_id["id"]
 
     def test_task_priority(self):
         task_name = Utiles.generate_random_string(5)
@@ -36,7 +38,7 @@ class TestMainPage:
         json_response = my_c_api.json()
         self.ID = json_response["id"]
         main_page = MainPage(self.driver)
-        main_page.priority_task(task_name, 3)
+        main_page.priority_task(task_name, '3')
 
     def test_task_deletion(self):
         task_name = Utiles.generate_random_string(5)
