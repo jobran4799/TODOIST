@@ -171,11 +171,11 @@ class MainPage(BasePage):
 
         self.find_choose_num_of_priority(priority_level)
         # Wait for the priority option to appear
-        WebDriverWait(self._driver, 10).until(
-            EC.visibility_of_element_located((By.XPATH, self.confirm_edit_priority)))
+        # WebDriverWait(self._driver, 10).until(
+        #     EC.visibility_of_element_located((By.XPATH, self.confirm_edit_priority)))
 
         # Find and click on the priority option
-        self.clicker_button(self.confirm_edit_priority)
+        self.clicker_button_with_retry(self.confirm_edit_priority)
 
     def find_click_on_due_date(self, task_name):
         self.click_on_due_date = self._driver.find_element(By.XPATH, f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]")
@@ -188,17 +188,10 @@ class MainPage(BasePage):
         time.sleep(2)
         self.find_click_on_due_date(task_name)
         self.action_perform_hover_over(self.click_on_due_date)
-        click_on_due_date_button = WebDriverWait(self._driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH,
-                                        f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@aria-label, 'Due date')]"))
-        )
-        click_on_due_date_button.click()
-
+        click_on_due_date_button = self._driver.find_element(By.XPATH,f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@aria-label, 'Due date')]")
+        self.clicker_button_with_retry(click_on_due_date_button)
         self.find_choose_date()
-        choose_date_button = WebDriverWait(self._driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, self.choose_date))
-        )
-        choose_date_button.click()
+        self.clicker_button_with_retry(self.choose_date)
 
 
 
