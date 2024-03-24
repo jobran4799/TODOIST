@@ -2,13 +2,13 @@ pipeline {
     agent any
 
     environment {
-         Define the Docker image name
+        // Define the Docker image name
         IMAGE_NAME = 'tests'
         TAG = 'latest'
     }
 
     stages {
-        stage('Build Docker Image') {
+         stage('Build Docker Image') {
             steps {
                 script {
                     def customImage = docker.build("${IMAGE_NAME}:${TAG}")
@@ -19,8 +19,8 @@ pipeline {
             steps {
                 echo 'Setting up Selenium server HUB...'
                 bat "start /B java -jar selenium-server.jar hub"
-                 Delay for 10 seconds
-                bat 'ping 127.0.0.1 -n 11 > nul'  Windows command to sleep for 10 seconds
+                // Delay for 10 seconds
+                bat 'ping 127.0.0.1 -n 11 > nul' // Windows command to sleep for 10 seconds
             }
         }
 
@@ -28,8 +28,8 @@ pipeline {
             steps {
                 echo 'Setting up Selenium server nodes...'
                 bat "start /B java -jar selenium-server-4.17.0.jar node --port 5555 --selenium-manager true"
-                 Delay for 10 seconds
-                bat 'ping 127.0.0.1 -n 11 > nul'  Windows command to sleep for 10 seconds
+                // Delay for 10 seconds
+                bat 'ping 127.0.0.1 -n 11 > nul' // Windows command to sleep for 10 seconds
             }
        }
 
