@@ -25,18 +25,17 @@ class MainPage(BasePage):
         WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(element)).send_keys(Keys.ENTER)
 
     def clicker_button(self, element):
-        WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(element)).click()
+        element.click()
 
     def action_perform_hover_over(self, element):
         actions = ActionChains(self._driver)
-        actions.move_to_element(
-            WebDriverWait(self._driver, 10).until(EC.visibility_of_element_located(element))).perform()
+        actions.move_to_element(element).perform()
 
     def find_task_inputs_to_add_task(self):
-        self.task_input = (By.XPATH, "//button[contains(text(),'Add task')]")
+        self.task_input = self._driver.find_element(By.XPATH, "//button[contains(text(),'Add task')]")
 
     def find_add_task_name_to_add_task(self):
-        self.add_task_name = (By.XPATH, "//div[contains(@aria-label,'Task name')]//p[@data-placeholder='Task name']")
+        self.add_task_name = self._driver.find_element(By.XPATH, "//div[contains(@aria-label,'Task name')]//p[@data-placeholder='Task name']")
 
     def create_task(self, text_task_name):
         self.find_task_inputs_to_add_task()
@@ -140,39 +139,7 @@ class MainPage(BasePage):
         # Click Enter to confirm the edit
         self.click_enter(confirm_edit_element)
 
-    # def find_menu_priority(self, task_name):
-    #     self.menu_priority = self._driver.find_element(By.XPATH,  f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@data-testid,'more_menu')]")
-    #
-    # def find_task_for_priority(self, task_name):
-    #      self.task_for_priority = self._driver.find_element(By.XPATH,  f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]")
-    #
-    # def find_choose_num_of_priority(self):
-    #     self.confirm_edit_priority = self._driver.find_element(By.XPATH, "//button[contains(@aria-label,'Priority 3')]")
-    #
-    #
-    # def priority_task(self, task_name):
-    #     self.find_task_for_priority(task_name)
-    #     self.action_perform_hover_over(self.task_for_priority)
-    #
-    #     # Wait for the menu to appear
-    #     WebDriverWait(self._driver, 10).until(
-    #         EC.visibility_of_element_located((By.XPATH,
-    #                                           f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@data-testid,'more_menu')]")))
-    #
-    #     # Find the menu button
-    #     self.find_menu_priority(task_name)
-    #
-    #     # Click on the menu button
-    #     self.clicker_button_with_retry(self.menu_priority)
-    #
-    #     # Wait for the priority option to appear
-    #     WebDriverWait(self._driver, 10).until(
-    #         EC.visibility_of_element_located((By.XPATH, "//button[contains(@aria-label,'Priority 3')]")
-    #                                          ))
-    #
-    #     # Find and click on the priority option
-    #     self.find_choose_num_of_priority()
-    #     self.clicker_button(self.confirm_edit_priority)
+
     def find_menu_priority(self, task_name):
         xpath = f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@data-testid,'more_menu')]"
         self.menu_priority = self._driver.find_element(By.XPATH, xpath)
