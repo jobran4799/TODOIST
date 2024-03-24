@@ -7,7 +7,7 @@ from logic.UI.Main_page import MainPage
 
 class TestMainPage:
     ID = None
-    ISDELETED = False
+    TODELETED = True
     def setup_method(self):
         self.browser_wrapper = BrowserWrapper()
         self.driver = self.browser_wrapper.get_driver("chrome")
@@ -17,7 +17,7 @@ class TestMainPage:
         login.fllow_log_in_test("beyonddevtestproject@gmail.com", "Zxcvbnm123")
 
     def teardown_method(self):
-        if not self.ISDELETED:
+        if self.TODELETED:
             my_c_api = self.test_p.delete_tasks(self.ID)
         self.driver.quit()
 
@@ -46,7 +46,7 @@ class TestMainPage:
         my_c_api = self.test_p.create_tasks(body)
         json_response = my_c_api.json()
         self.ID = json_response["id"]
-        self.ISDELETED = True
+        self.TODELETED = False
         main_page = MainPage(self.driver)
         main_page.delete_task(task_name)
 
@@ -66,7 +66,7 @@ class TestMainPage:
         my_c_api = self.test_p.create_tasks(body)
         json_response = my_c_api.json()
         self.ID = json_response["id"]
-        self.ISDELETED = True
+        self.TODELETED = False
         main_page = MainPage(driver)
         main_page.click_completed_task(task_name)
 
