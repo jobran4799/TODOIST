@@ -83,7 +83,7 @@ class MainPage(BasePage):
         self.task_input = self._driver.find_element(By.XPATH, "//button[contains(text(),'Add task')]")
 
     def find_add_task_name_to_add_task(self):
-        self.add_task_name = self._driver.find_element(By.XPATH, "//div[contains(@aria-label,'Task name')]")
+        self.add_task_name = self._driver.find_element(By.XPATH, "//div[contains(@aria-label,'Task name')]//p[@data-placeholder='Task name']")
 
     def creat_task(self, text_task_name):
         self.find_task_inputs_to_add_task()
@@ -91,7 +91,6 @@ class MainPage(BasePage):
         self.clicker_button(self.task_input)
         time.sleep(2)
         self.find_add_task_name_to_add_task()
-        self.clicker_button(self.add_task_name)
         time.sleep(2)
         self.fill_input(self.add_task_name, text_task_name)
         time.sleep(2)
