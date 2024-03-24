@@ -22,7 +22,7 @@ class Main_page_test(unittest.TestCase):
     def test_Task_creation(self):
         task_name = Utiles.generate_random_string(5)
         main_page = MainPage(self.driver)
-        main_page.creat_task(task_name)
+        main_page.create_task(task_name)
         my_c_api = self.test_p.get_active_tasks()
         json_response = my_c_api.json()
         self.ID = json_response[0]["id"]
