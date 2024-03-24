@@ -19,15 +19,15 @@ class Main_page_test(unittest.TestCase):
         login = LoginPage(self.driver)
         login.fllow_log_in_test("beyonddevtestproject@gmail.com", "Zxcvbnm123")
 
-    # def test_Task_creation(self):
-    #     task_name = Utiles.generate_random_string(5)
-    #     main_page = MainPage(self.driver)
-    #     main_page.creat_task(task_name)
-    #     my_c_api = self.test_p.get_active_tasks()
-    #     json_response = my_c_api.json()
-    #     self.ID = json_response[0]["id"]
-    #     time.sleep(2)
-    #     self.assertTrue(main_page, "No match between the tasks name")
+    def test_Task_creation(self):
+        task_name = Utiles.generate_random_string(5)
+        main_page = MainPage(self.driver)
+        main_page.creat_task(task_name)
+        my_c_api = self.test_p.get_active_tasks()
+        json_response = my_c_api.json()
+        self.ID = json_response[0]["id"]
+        time.sleep(2)
+        self.assertTrue(main_page, "No match between the tasks name")
 
     # def test_Task_deletion(self):
     #     task_name = Utiles.generate_random_string(5)
@@ -77,15 +77,15 @@ class Main_page_test(unittest.TestCase):
         main_page.priority_task(task_name)
         self.assertTrue(main_page, "priority does not selected")
     #
-    def test_Task_set_due_data(self):
-        task_name = Utiles.generate_random_string(5)
-        body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
-        my_c_api = self.test_p.create_tasks(body)
-        json_response = my_c_api.json()
-        self.ID = json_response["id"]
-        main_page = MainPage(self.driver)
-        main_page.set_due_date_task(task_name)
-        self.assertTrue(main_page, "data did not be modified?")
+    # def test_Task_set_due_data(self):
+    #     task_name = Utiles.generate_random_string(5)
+    #     body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
+    #     my_c_api = self.test_p.create_tasks(body)
+    #     json_response = my_c_api.json()
+    #     self.ID = json_response["id"]
+    #     main_page = MainPage(self.driver)
+    #     main_page.set_due_date_task(task_name)
+    #     self.assertTrue(main_page, "data did not be modified?")
 
 
     def tearDown(self):

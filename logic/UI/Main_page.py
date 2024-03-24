@@ -263,19 +263,19 @@ class MainPage(BasePage):
     #     self.find_choose_date()
     #     time.sleep(2)
     #     self.clicker_button(self.choose_date)
-    # def set_due_date_task(self, task_name):
-    #     self.find_click_on_due_date(task_name)
-    #     click_on_due_date_button = WebDriverWait(self._driver, 10).until(
-    #         EC.element_to_be_clickable((By.XPATH,
-    #                                     f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@aria-label, 'Due date')]"))
-    #     )
-    #     click_on_due_date_button.click()
-    #
-    #     self.find_choose_date()
-    #     choose_date_button = WebDriverWait(self._driver, 10).until(
-    #         EC.element_to_be_clickable((By.XPATH, "//button[contains(@aria-label,'2024-04-05')]"))
-    #     )
-    #     choose_date_button.click()
+    def set_due_date_task(self, task_name):
+        self.find_click_on_due_date(task_name)
+        click_on_due_date_button = WebDriverWait(self._driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH,
+                                        f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@aria-label, 'Due date')]"))
+        )
+        click_on_due_date_button.click()
+
+        self.find_choose_date()
+        choose_date_button = WebDriverWait(self._driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//button[contains(@aria-label,'2024-04-05')]"))
+        )
+        choose_date_button.click()
 
         # def find_task_complition(self):
         #     self.find_completed_task = self._driver.find_element(*self.FIND_COMPLETE_TASK)
