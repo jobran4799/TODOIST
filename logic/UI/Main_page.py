@@ -161,7 +161,7 @@ class MainPage(BasePage):
 
         self.find_menu_priority(task_name)
         # Wait for the menu to appear
-        # WebDriverWait(self._driver, 10).until(EC.visibility_of_element_located(self.menu_priority))
+        # WebDriverWait(self._driver, 10).until(EC.visibility_of_element_located(self.menu_priority)
 
         # Find the menu button
 
