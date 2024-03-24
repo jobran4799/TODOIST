@@ -91,7 +91,7 @@ class MainPage(BasePage):
         time.sleep(2)
         self.find_add_task_name_to_add_task()
         time.sleep(2)
-        self.fill_input(self.task_input, text_task_name)
+        self.fill_input(self.add_task_name, text_task_name)
         time.sleep(2)
         self.click_enter(self.add_task_name)
 
