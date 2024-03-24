@@ -32,7 +32,7 @@ jobs:
 #      run: python tests_example_run.py
 
     - name: Run pytest tests
-      run: pytest tests_example_run.py --html=report.html
+      run: pytest test_example.py --html=report.html
 
 
 
