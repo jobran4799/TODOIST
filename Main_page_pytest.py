@@ -25,13 +25,16 @@ class TestMainPage:
         task_name = Utiles.generate_random_string(5)
         main_page = MainPage(self.driver)
         main_page.create_task(task_name)
+        my_c_api = self.test_p.get_active_tasks()
+        json_response = my_c_api.json()
+        self.ID = json_response[0]["id"]
 
     def test_task_priority(self):
         task_name = Utiles.generate_random_string(5)
         body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
         my_c_api = self.test_p.create_tasks(body)
         json_response = my_c_api.json()
-        task_id = json_response["id"]
+        self.ID = json_response["id"]
         main_page = MainPage(self.driver)
         main_page.priority_task(task_name, 3)
 
@@ -40,7 +43,7 @@ class TestMainPage:
         body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
         my_c_api = self.test_p.create_tasks(body)
         json_response = my_c_api.json()
-        task_id = json_response["id"]
+        self.ID = json_response["id"]
         self.ISDELETED = True
         main_page = MainPage(self.driver)
         main_page.delete_task(task_name)
@@ -50,7 +53,7 @@ class TestMainPage:
         body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
         my_c_api = self.test_p.create_tasks(body)
         json_response = my_c_api.json()
-        task_id = json_response["id"]
+        self.ID = json_response["id"]
         main_page = MainPage(self.driver)
         main_page.set_due_date_task(task_name)
 
@@ -58,9 +61,9 @@ class TestMainPage:
         driver, test_p = setup
         task_name = Utiles.generate_random_string(5)
         body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
-        my_c_api = test_p.create_tasks(body)
+        my_c_api = self.test_p.create_tasks(body)
         json_response = my_c_api.json()
-        task_id = json_response["id"]
+        self.ID = json_response["id"]
         self.ISDELETED = True
         main_page = MainPage(driver)
         main_page.click_completed_task(task_name)
@@ -69,9 +72,9 @@ class TestMainPage:
         driver, test_p = setup
         task_name = Utiles.generate_random_string(5)
         body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
-        my_c_api = test_p.create_tasks(body)
+        my_c_api = self.test_p.create_tasks(body)
         json_response = my_c_api.json()
-        task_id = json_response["id"]
+        self.ID = json_response["id"]
         main_page = MainPage(driver)
         main_page.edit_task(task_name)
 

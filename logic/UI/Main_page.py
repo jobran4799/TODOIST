@@ -81,7 +81,7 @@ class MainPage(BasePage):
 
         # Click the menu clicker button
         self.clicker_button_with_retry(self.menu_clicker)
-        time.sleep(1)
+        time.sleep(2)
         # Wait for the delete request button to be clickable
         self.find_delete_requste()
         # WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(self.delete_requeste))
@@ -123,7 +123,7 @@ class MainPage(BasePage):
         # Click on the task edit
         self.find_task_inputs_to_edit_task(text_edit)
         self.clicker_button_with_retry(self.inputs_to_edit_task)
-        time.sleep(1)
+        time.sleep(2)
         # Wait for the add description element to appear
         add_description_element = self._driver.find_element(By.XPATH, "//div[contains(@class,'task-overview-description-placeholder')]")
 
@@ -188,7 +188,7 @@ class MainPage(BasePage):
         time.sleep(1)
         click_on_due_date_button = self._driver.find_element(By.XPATH,f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@aria-label, 'Due date')]")
         self.clicker_button_with_retry(click_on_due_date_button)
-        time.sleep(1)
+        time.sleep(2)
         self.find_choose_date()
         self.clicker_button_with_retry(self.choose_date)
 
