@@ -45,7 +45,7 @@ class MainPage(BasePage):
 
         # Wait for the add task name input field to be visible
         self.find_add_task_name_to_add_task()
-        WebDriverWait(self._driver, 10).until(EC.visibility_of_element_located(self.add_task_name))
+        # WebDriverWait(self._driver, 10).until(EC.visibility_of_element_located(self.add_task_name))
         self.add_task_name.send_keys(text_task_name)
 
         # Perform action only when the input field is ready
@@ -69,6 +69,7 @@ class MainPage(BasePage):
         actions.move_to_element(task_input).perform()
 
     def delete_task(self, task_name):
+        time.sleep(2)
         self.find_task_inputs_to_delete_task(task_name)
 
         # Hover over the task element
@@ -118,6 +119,7 @@ class MainPage(BasePage):
         print("Failed to click the element after multiple attempts")
 
     def edit_task(self, text_edit):
+        time.sleep(2)
         # Click on the task edit
         self.find_task_inputs_to_edit_task(text_edit)
         self.clicker_button_with_retry(self.inputs_to_edit_task)
@@ -153,6 +155,7 @@ class MainPage(BasePage):
         self.confirm_edit_priority = self._driver.find_element(By.XPATH, xpath)
 
     def priority_task(self, task_name, priority_level):
+        time.sleep(2)
         self.find_task_for_priority(task_name)
         self.action_perform_hover_over(self.task_for_priority)
 
@@ -175,7 +178,7 @@ class MainPage(BasePage):
         self.clicker_button(self.confirm_edit_priority)
 
     def find_click_on_due_date(self, task_name):
-        self.click_on_due_date = self._driver.find_element(By.XPATH, f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@aria-label, 'Due date')]")
+        self.click_on_due_date = self._driver.find_element(By.XPATH, f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]")
 
     def find_choose_date(self):
         self.choose_date = self._driver.find_element(By.XPATH, "//button[contains(@aria-label,'2024-04-05')]")
@@ -183,6 +186,7 @@ class MainPage(BasePage):
 
     def set_due_date_task(self, task_name):
         self.find_click_on_due_date(task_name)
+        self.action_perform_hover_over(self.click_on_due_date)
         click_on_due_date_button = WebDriverWait(self._driver, 10).until(
             EC.element_to_be_clickable((By.XPATH,
                                         f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@aria-label, 'Due date')]"))
@@ -191,7 +195,7 @@ class MainPage(BasePage):
 
         self.find_choose_date()
         choose_date_button = WebDriverWait(self._driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//button[contains(@aria-label,'2024-04-05')]"))
+            EC.element_to_be_clickable((By.XPATH, self.choose_date))
         )
         choose_date_button.click()
 
