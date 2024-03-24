@@ -5,14 +5,6 @@ from selenium.webdriver.chrome.options import Options
 import os
 from os.path import dirname as up
 
-# try:
-#     with open('../../config.json') as f:
-#         data = json.load(f)
-# except FileNotFoundError:
-#     print("Error: 'config.json' file not found. Make sure the file exists in the correct location.")
-#     raise  # Raise the error to halt execution if the file is essential for the script to run
-
-
 class BrowserWrapper:
 
     def __init__(self):
