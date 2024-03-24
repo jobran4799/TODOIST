@@ -69,26 +69,26 @@ class MainPage(BasePage):
         actions.move_to_element(task_input).perform()
 
     def delete_task(self, task_name):
-        time.sleep(2)
+        time.sleep(3)
         self.find_task_inputs_to_delete_task(task_name)
 
         # Hover over the task element
         self.action_perform_hover_over(self.task_delete_input)
-
+        time.sleep(1)
         # Wait for the menu clicker button to be clickable
         self.find_more_menu_clicker(task_name)
         # WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(self.menu_clicker))
 
         # Click the menu clicker button
         self.clicker_button_with_retry(self.menu_clicker)
-
+        time.sleep(1)
         # Wait for the delete request button to be clickable
         self.find_delete_requste()
         # WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(self.delete_requeste))
 
         # Click the delete request button
         self.clicker_button_with_retry(self.delete_requeste)
-
+        time.sleep(1)
         # Wait for the confirmation delete request button to be clickable
         self.find_confrmation_delete_requste()
         # WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(self.confirm_delete_requeste))
@@ -123,21 +123,18 @@ class MainPage(BasePage):
         # Click on the task edit
         self.find_task_inputs_to_edit_task(text_edit)
         self.clicker_button_with_retry(self.inputs_to_edit_task)
-
+        time.sleep(1)
         # Wait for the add description element to appear
-        add_description_element = WebDriverWait(self._driver, 10).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, "//div[contains(@class,'task-overview-description-placeholder')]"))
-        )
+        add_description_element = self._driver.find_element(By.XPATH, "//div[contains(@class,'task-overview-description-placeholder')]")
 
         # Click on the add description element
         self.clicker_button_with_retry(add_description_element)
-
+        time.sleep(1)
         # Send keys to the confirm edit element
         self.find_confirm_edit()  # Assuming confirm edit element is constant after clicking on add description
         confirm_edit_element = self.confirm_edit
         confirm_edit_element.send_keys(text_edit)
-
+        time.sleep(1)
         # Click Enter to confirm the edit
         self.click_enter(confirm_edit_element)
 
@@ -168,12 +165,12 @@ class MainPage(BasePage):
 
         # Click on the menu button
         self.clicker_button_with_retry(self.menu_priority)
-
+        time.sleep(2)
         self.find_choose_num_of_priority(priority_level)
         # Wait for the priority option to appear
         # WebDriverWait(self._driver, 10).until(
         #     EC.visibility_of_element_located((By.XPATH, self.confirm_edit_priority)))
-
+        time.sleep(2)
         # Find and click on the priority option
         self.clicker_button_with_retry(self.confirm_edit_priority)
 
@@ -188,14 +185,17 @@ class MainPage(BasePage):
         time.sleep(2)
         self.find_click_on_due_date(task_name)
         self.action_perform_hover_over(self.click_on_due_date)
+        time.sleep(1)
         click_on_due_date_button = self._driver.find_element(By.XPATH,f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@aria-label, 'Due date')]")
         self.clicker_button_with_retry(click_on_due_date_button)
+        time.sleep(1)
         self.find_choose_date()
         self.clicker_button_with_retry(self.choose_date)
 
 
 
     def click_completed_task(self, task_name):
+        time.sleep(2)
         self.completed_task = self._driver.find_element(By.XPATH,  f"//div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]//button[contains(@class,'task_checkbox')]")
         self.completed_task.click()
 
