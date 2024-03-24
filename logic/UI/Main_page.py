@@ -54,42 +54,69 @@ class MainPage(BasePage):
     def username_is_displayed(self):
         return self.user_name.is_displayed()
 
-    def fill_input(self, task_input, task_TaskName):
-        task_input.send_keys(task_TaskName)
-        time.sleep(2)
+    # def fill_input(self, task_input, task_TaskName):
+    #     task_input.send_keys(task_TaskName)
+    #     time.sleep(2)
+    #
+    # def click_enter(self, write_input):
+    #     # WebDriverWait(self._driver, 10).until(
+    #     #     EC.presence_of_element_located(write_input))
+    #     write_input.send_keys(Keys.ENTER)
+    #
+    #
+    # def clicker_button(self, click):
+    #     # WebDriverWait(self._driver, 10).until(
+    #     #     EC.element_to_be_clickable(click))
+    #     click.click()
+    #
+    # def action_prform_hover_over(self, hover_to_project):
+    #     actions = ActionChains(self._driver)
+    #     actions.move_to_element(hover_to_project).perform()
+    #
+    #
+    #
+    # def find_task_inputs_to_add_task(self):
+    #     self.task_input = self._driver.find_element(By.XPATH, "//button[contains(text(),'Add task')]")
+    #
+    # def find_add_task_name_to_add_task(self):
+    #     self.add_task_name = self._driver.find_element(By.XPATH, "//div[contains(@aria-label,'Task name')]//p[@data-placeholder='Task name']")
+    #
+    # def creat_task(self, text_task_name):
+    #     self.find_task_inputs_to_add_task()
+    #     time.sleep(2)
+    #     self.clicker_button(self.task_input)
+    #     time.sleep(2)
+    #     self.find_add_task_name_to_add_task()
+    #     time.sleep(2)
+    #     self.fill_input(self.add_task_name, text_task_name)
+    #     time.sleep(2)
+    #     self.click_enter(self.add_task_name)
 
-    def click_enter(self, write_input):
-        # WebDriverWait(self._driver, 10).until(
-        #     EC.presence_of_element_located(write_input))
-        write_input.send_keys(Keys.ENTER)
+    def fill_input(self, element, text):
+        WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(element)).send_keys(text)
 
+    def click_enter(self, element):
+        WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(element)).send_keys(Keys.ENTER)
 
-    def clicker_button(self, click):
-        # WebDriverWait(self._driver, 10).until(
-        #     EC.element_to_be_clickable(click))
-        click.click()
+    def clicker_button(self, element):
+        WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(element)).click()
 
-    def action_prform_hover_over(self, hover_to_project):
+    def action_perform_hover_over(self, element):
         actions = ActionChains(self._driver)
-        actions.move_to_element(hover_to_project).perform()
-
-
+        actions.move_to_element(
+            WebDriverWait(self._driver, 10).until(EC.visibility_of_element_located(element))).perform()
 
     def find_task_inputs_to_add_task(self):
-        self.task_input = self._driver.find_element(By.XPATH, "//button[contains(text(),'Add task')]")
+        self.task_input = (By.XPATH, "//button[contains(text(),'Add task')]")
 
     def find_add_task_name_to_add_task(self):
-        self.add_task_name = self._driver.find_element(By.XPATH, "//div[contains(@aria-label,'Task name')]//p[@data-placeholder='Task name']")
+        self.add_task_name = (By.XPATH, "//div[contains(@aria-label,'Task name')]//p[@data-placeholder='Task name']")
 
-    def creat_task(self, text_task_name):
+    def create_task(self, text_task_name):
         self.find_task_inputs_to_add_task()
-        time.sleep(2)
         self.clicker_button(self.task_input)
-        time.sleep(2)
         self.find_add_task_name_to_add_task()
-        time.sleep(2)
         self.fill_input(self.add_task_name, text_task_name)
-        time.sleep(2)
         self.click_enter(self.add_task_name)
 
     def find_task_inputs_to_delete_task(self, task_name):
