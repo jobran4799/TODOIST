@@ -42,7 +42,7 @@ class MainPage(BasePage):
         self.find_task_inputs_to_add_task()
         self.task_input.click()
 
-        # Wait for the add task name input field to be visible
+        # Wait for the add task name input field to be visibled
         self.find_add_task_name_to_add_task()
         # WebDriverWait(self._driver, 10).until(EC.visibility_of_element_located(self.add_task_name))
         self.add_task_name.send_keys(text_task_name)
