@@ -164,7 +164,7 @@ class MainPage(BasePage):
         self.action_perform_hover_over(self.task_for_priority)
 
         self.find_menu_priority(task_name)
-        # Wait for the menu to appear
+        # Wait for the menu to appea
         # WebDriverWait(self._driver, 10).until(EC.visibility_of_element_located(self.menu_priority)
 
         # Find the menu butto
