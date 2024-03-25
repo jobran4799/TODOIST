@@ -17,7 +17,14 @@ class MainPage(BasePage):
     def username_is_displayed(self):
         return self.user_name.is_displayed()
 
+    def wait_to_locate_path(self):
+        return self.user_name.is_displayed()
 
+    def wait_path_to_be_clickbale(self, xpath):
+        (WebDriverWait(self._driver, 10).until(
+            EC.presence_of_element_located(
+                (By.XPATH, xpath))
+        ))
     def fill_input(self, element, text):
         WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(element)).send_keys(text)
 
