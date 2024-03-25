@@ -165,8 +165,8 @@ class MainPage(BasePage):
 
 
     def find_menu_priority(self, task_name):
-        xpath = f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@data-testid,'more_menu')]"
-        self.menu_priority = self.wait_path_to_be_clickbale(45, xpath)
+        xpath = "//button[contains(@data-testid,'more_menu')]"
+        self.menu_priority = self.wait_path_to_be_clickbale(15, xpath)
 
     def find_task_for_priority(self, task_name):
         self.task_for_priority = self.wait_to_locate_path(20, f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]")
