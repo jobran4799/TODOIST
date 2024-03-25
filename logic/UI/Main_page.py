@@ -71,7 +71,7 @@ class MainPage(BasePage):
         self.menu_clicker = self.wait_path_to_be_clickbale(27, f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@aria-label,'More task actions')]")
 
     def find_delete_requste(self):
-        self.delete_requeste = self.wait_to_locate_path(27, "//button[contains(@data-action-hint,'task-overflow-menu-delete')]")
+        self.delete_requeste = self.wait_to_locate_path(30, "//button[contains(@data-action-hint,'task-overflow-menu-delete')]")
 
 
     def find_confrmation_delete_requste(self):
@@ -123,7 +123,7 @@ class MainPage(BasePage):
 
 
     def find_add_descrption(self):
-        self.add_descrption = self.wait_to_locate_path(27,"//div[contains(@aria-description,'Activate to edit the task description')]")
+        self.add_descrption = self.wait_to_locate_path(30,"//div[contains(@aria-description,'Activate to edit the task description')]")
 
     def find_confirm_edit(self):
         self.confirm_edit = self.wait_to_locate_path(27,"//p[contains(@data-placeholder,'Description')]")
@@ -166,7 +166,7 @@ class MainPage(BasePage):
 
     def find_menu_priority(self, task_name):
         xpath = f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@aria-label,'More task actions')]"
-        self.menu_priority = self.wait_path_to_be_clickbale(27, xpath)
+        self.menu_priority = self.wait_path_to_be_clickbale(30, xpath)
 
     def find_task_for_priority(self, task_name):
         self.task_for_priority = self.wait_to_locate_path(27, f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]")
