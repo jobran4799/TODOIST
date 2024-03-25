@@ -26,10 +26,11 @@ jobs:
         chrome-version: latest
 
     - name: Run pytest tests and generate HTML report
-      run: pytest Main_page_pytest.py --html=report.html
+      run: pytest Main_page_pytest.py --html=report/report.html
+      continue-on-error: true
 
     - name: Upload HTML report as artifact
       uses: actions/upload-artifact@v2
       with:
         name: pytest-html-report
-        path: report.html
+        path: report

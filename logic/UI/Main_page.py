@@ -162,8 +162,12 @@ class MainPage(BasePage):
         self.menu_priority = self._driver.find_element(By.XPATH, xpath)
 
     def find_task_for_priority(self, task_name):
-        xpath = f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]"
-        self.task_for_priority = self._driver.find_element(By.XPATH, xpath)
+        self.task_for_priority = WebDriverWait(self._driver, 10).until(
+            EC.presence_of_element_located(
+                (By.XPATH, f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]"))
+        )
+        # xpath = f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]"
+        # self.task_for_priority = self._driver.find_element(By.XPATH, xpath)
 
     def find_choose_num_of_priority(self, priority_level):
         xpath = f"//button[contains(@aria-label,'Priority {priority_level}')]"
