@@ -175,7 +175,7 @@ class MainPage(BasePage):
 
     def find_choose_num_of_priority(self, priority_level):
         xpath = f"//button[contains(@aria-label,'Priority {priority_level}')]"
-        self.confirm_edit_priority = self.wait_to_locate_path(23, xpath)
+        self.confirm_edit_priority = self.wait_to_locate_path(30, xpath)
 
     def priority_task(self, task_name, priority_level):
         time.sleep(3)
