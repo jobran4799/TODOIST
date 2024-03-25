@@ -73,7 +73,7 @@ class MainPage(BasePage):
         self.delete_requeste = self.wait_to_locate_path("//button[contains(@data-action-hint,'task-overflow-menu-delete')]")
 
     def find_confrmation_delete_requste(self):
-        self.confirm_delete_requeste = self.wait_path_to_be_clickbale("//button[contains(@type,'submit')]")
+        self.confirm_delete_requeste = self.wait_to_locate_path("//button[contains(@type,'submit')]")
 
     # def find_delete_requste_clickabel(self):
     #     self.delete_requested = self._driver.find_element(By.XPATH, "//button[contains(@data - tabindex, 'data-active-item')]")
@@ -121,7 +121,7 @@ class MainPage(BasePage):
 
 
     def find_add_descrption(self):
-        self.add_descrption = self.wait_to_locate_path("//div[contains(@aria-label,'Task description')]")
+        self.add_descrption = self.wait_path_to_be_clickbale("//div[contains(@aria-label,'Task description')]")
 
     def find_confirm_edit(self):
         self.confirm_edit = self.wait_to_locate_path("//p[contains(@data-placeholder,'Description')]")
@@ -142,7 +142,6 @@ class MainPage(BasePage):
         # Click on the task edit
         self.find_task_inputs_to_edit_task(text_edit)
         self.clicker_button_with_retry(self.inputs_to_edit_task)
-        time.sleep(3)
         self.find_add_descrption()
         # add_description_element = WebDriverWait(self._driver, 10).until(
         #     EC.presence_of_element_located(
@@ -165,7 +164,7 @@ class MainPage(BasePage):
 
     def find_menu_priority(self, task_name):
         xpath = f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@aria-label,'More task actions')]"
-        self.menu_priority = self.wait_path_to_be_clickbale(xpath)
+        self.menu_priority = self.wait_to_locate_path(xpath)
 
     def find_task_for_priority(self, task_name):
         self.task_for_priority = self.wait_to_locate_path(f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]")
@@ -174,13 +173,12 @@ class MainPage(BasePage):
 
     def find_choose_num_of_priority(self, priority_level):
         xpath = f"//button[contains(@aria-label,'Priority {priority_level}')]"
-        self.confirm_edit_priority = self.wait_path_to_be_clickbale(xpath)
+        self.confirm_edit_priority = self.wait_to_locate_path(xpath)
 
     def priority_task(self, task_name, priority_level):
         time.sleep(3)
         self.find_task_for_priority(task_name)
         self.action_perform_hover_over(self.task_for_priority)
-        time.sleep(2)
         self.find_menu_priority(task_name)
         # Wait for the menu to appea
         # WebDriverWait(self._driver, 10).until(EC.visibility_of_element_located(self.menu_priority)
