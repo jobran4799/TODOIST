@@ -2,105 +2,98 @@ pipeline {
     agent any
 
     stages {
-        stage('Preparation') {
+        stage('Setup Environment') {
             steps {
-                // Checkout SCM
-                checkout scm
+                echo 'Setting up Python environment...'
+                bat 'C:\\Users\\pc-admin\\AppData\\Local\\Programs\\Python\\Python312\\python.exe -m venv venv'
+                bat 'venv\\Scripts\\python.exe -m pip install --upgrade pip'
+                bat 'venv\\Scripts\\pip.exe install -r requirements.txt'
+            }
+            post {
+                success {
+                    slackSend(color: 'good', message: "SUCCESS: Setup Environment stage completed successfully.")
+                }
+                failure {
+                    slackSend(color: 'danger', message: "FAILURE: Setup Environment stage failed.")
+                }
             }
         }
-        stage('Install Dependencies') {
+
+        stage('Setup Selenium Server HUB') {
             steps {
-                // Install Selenium
-                sh '''
-                python3 -m venv venv
-                source venv/bin/activate
-                pip install selenium
-                '''
-                // Download and extract ChromeDriver using curl
-                sh 'curl -O https://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip'
-                sh 'unzip chromedriver_linux64.zip -d /usr/local/bin/'
-                sh 'rm chromedriver_linux64.zip'
-                // Verify ChromeDriver installation
-                sh 'chromedriver --version'
+                echo 'Setting up Selenium server HUB...'
+                bat "start /b java -jar path_to_selenium_server\\selenium-server-4.17.0.jar hub"
+                bat 'ping 127.0.0.1 -n 11 > nul'
             }
+            post {
+                success {
+                    slackSend(color: 'good', message: "SUCCESS: Setup Selenium Server HUB stage completed successfully.")
+                }
+                failure {
+                    slackSend(color: 'danger', message: "FAILURE: Setup Selenium Server HUB stage failed.")
+                }
+            }
+        }
+
+        stage('Setup Selenium Server nodes') {
+            steps {
+                echo 'Setting up Selenium server nodes...'
+                bat "start /b java -jar path_to_selenium_server\\selenium-server-4.17.0.jar node --port 5555 --selenium-manager true"
+                bat 'ping 127.0.0.1 -n 11 > nul'
+            }
+            post {
+                success {
+                    slackSend(color: 'good', message: "SUCCESS: Setup Selenium Server nodes stage completed successfully.")
+                }
+                failure {
+                    slackSend(color: 'danger', message: "FAILURE: Setup Selenium Server nodes stage failed.")
+                }
+            }
+        }
+
+        stage(' Running Tests') {
+            steps {
+                echo 'Testing..'
+                bat "venv\\Scripts\\python.exe -m pytest Main_page_pytest.py --html=report.html"
+            }
+            post {
+                success {
+                    slackSend(color: 'good', message: "SUCCESS: Running Tests stage completed successfully.")
+                }
+                failure {
+                    slackSend(color: 'danger', message: "FAILURE: Running Tests stage failed.")
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying..'
+                // Your deployment steps here
+            }
+            post {
+                success {
+                    slackSend(color: 'good', message: "SUCCESS: Deploy stage completed successfully.")
+                }
+                failure {
+                    slackSend(color: 'danger', message: "FAILURE: Deploy stage failed.")
+                }
+            }
+        }
     }
 
-        stage('Run Tests') {
-            steps {
-                sh '''
-                source venv/bin/activate
-                python3 -m pytest tests_example_run.py
-                '''
-            }
-        }
-    }
     post {
         always {
-            echo 'Cleaning up'
-            // Clean up any actions necessary after pipeline execution
-            sh 'rm -rf venv'
+            echo 'Cleaning up...'
+            slackSend(color: 'warning', message: "NOTIFICATION: Cleaning up resources...")
+        }
+        success {
+            echo 'Build succeeded.'
+            slackSend(color: 'good', message: "SUCCESS: Build completed successfully.")
+        }
+        failure {
+            echo 'Build failed.'
+            slackSend(color: 'danger', message: "FAILURE: Build failed.")
         }
     }
 }
-
-
-//pipeline {
-//    agent any
-
-//    environment {
-        // Define the Docker image name
-//        IMAGE_NAME = 'tests'
-//        TAG = 'latest'
-//    }
-
-//    stages {
-//        stage('Build Docker Image') {
-//            steps {
-//                script {
-//                    def customImage = docker.build("${IMAGE_NAME}:${TAG}")
-//               }
-//            }
-//        }
-//        stage('Setup Selenium Server HUB') {
-//            steps {
-//                echo 'Setting up Selenium server HUB...'
- //               bat "start /B java -jar selenium-server.jar hub"
- //               // Delay for 10 seconds
- //               bat 'ping 127.0.0.1 -n 11 > nul' // Windows command to sleep for 10 seconds
- //           }
- //       }
-
- //      stage('Setup Selenium Server nodes') {
- //           steps {
- //               echo 'Setting up Selenium server nodes...'
- //               bat "start /B java -jar selenium-server-4.17.0.jar node --port 5555 --selenium-manager true"
- //               // Delay for 10 seconds
- //               bat 'ping 127.0.0.1 -n 11 > nul' // Windows command to sleep for 10 seconds
- //           }
- //      }
-
- //       stage('Run Tests in Parallel') {
- //           steps {
- //               script {
- //                   parallel(
- //                       'API Test': {
- //                           bat "docker run --name tests_example_run ${IMAGE_NAME}:${TAG} python tests_example_run.py"
- //                           bat "docker rm tests_example_run"
- //                       },
- //                       'tests_example_run': {
- //                           bat "docker run --name Test_Runer ${IMAGE_NAME}:${TAG} python Test_Runer.py"
- //                           bat "docker rm Test_Runer"
- //                       }
- //                   )
- //               }
- //           }
- //       }
- //   }
-
- //   post {
- //       always {
- //           echo 'Cleaning up...'
- //           bat "docker rmi ${IMAGE_NAME}:${TAG}"
- //       }
- //   }
-//}

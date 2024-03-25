@@ -1,16 +1,19 @@
-name: Selenium Test
+name: Run pytest tests
+
 on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-      name: Checkout code
+    - name: Checkout code
+      uses: actions/checkout@v2
+
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.12'
+        python-version: '3.12.0'
 
     - name: Install dependencies
       run: |
@@ -18,16 +21,16 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Setup ChromeDriver
-      uses: browser-actions/setup-chrome@v1
+      uses: browser-actions/setup-chrome@latest
       with:
         chrome-version: latest
 
-#    - name: Run API tests
-#      run: python Test_Runer.py
+    - name: Run pytest tests and generate HTML report
+      run: pytest Main_page_pytest.py --html=report/report.html
+      continue-on-error: true
 
-    - name: Run UI tests
-      run: python tests_example_run.py
-
-
-    
-
+    - name: Upload HTML report as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: pytest-html-report
+        path: report

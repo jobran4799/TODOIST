@@ -6,8 +6,6 @@ from logic.UI.Log_in_page import LoginPage
 from logic.UI.Main_page import MainPage
 
 
-
-
 class test_example(unittest.TestCase):
     def setUp(self):
         self.browser_wrapper = BrowserWrapper()
