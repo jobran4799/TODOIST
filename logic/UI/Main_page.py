@@ -123,7 +123,7 @@ class MainPage(BasePage):
 
 
     def find_add_descrption(self):
-        self.add_descrption = self.wait_to_locate_path(30,"//div[contains(@aria-description,'Activate to edit the task description')]")
+        self.add_descrption = self.wait_to_locate_path(23,"//div[contains(@aria-description,'Activate to edit the task description')]")
 
     def find_confirm_edit(self):
         self.confirm_edit = self.wait_to_locate_path(24,"//p[contains(@data-placeholder,'Description')]")
