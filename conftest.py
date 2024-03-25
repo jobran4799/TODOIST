@@ -9,6 +9,7 @@ from logic.UI.Log_in_page import LoginPage
 
 @pytest.fixture
 def setup(request):
+    print("started")
     browser_wrapper = BrowserWrapper()
     driver = browser_wrapper.get_driver("chrome")
     my_api = APIWrapper()
@@ -17,6 +18,7 @@ def setup(request):
     login.fllow_log_in_test("beyonddevtestproject@gmail.com", "Zxcvbnm123")
 
     def teardown():
+        print("used")
         if TestMainPage.TODELETED:
             my_c_api = test_p.delete_tasks(TestMainPage.ID)
         driver.quit()
