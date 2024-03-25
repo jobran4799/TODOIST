@@ -51,7 +51,7 @@ class ProjectListPage(BasePage):
 
 
     def find_add_project_clicker(self):
-        self.clicker_add_project = self.wait_path_to_be_clickbale(23, "//div[contains(@role,'menu')]//button[contains(@aria-label,'Add project')]")
+        self.clicker_add_project = self.wait_to_locate_path(35, "//div[contains(@role,'menu')]//button[contains(@aria-label,'Add project')]")
 
     def find_input_project_name(self):
         self.input_project_name = self.wait_to_locate_path(23, "//input[contains(@id,'edit_project_modal_field_name')]")
