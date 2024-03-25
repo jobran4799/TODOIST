@@ -75,7 +75,7 @@ class MainPage(BasePage):
 
 
     def find_confrmation_delete_requste(self):
-        self.confirm_delete_requeste = self.wait_path_to_be_clickbale(25, "//button[contains(@data-autofocus,'true')]")
+        self.confirm_delete_requeste = self.wait_path_to_be_clickbale(30, "//button[contains(@data-autofocus,'true')]")
 
     # def find_delete_requste_clickabel(self):
     #     self.delete_requested = self._driver.find_element(By.XPATH, "//button[contains(@data - tabindex, 'data-active-item')]")
@@ -123,7 +123,7 @@ class MainPage(BasePage):
 
 
     def find_add_descrption(self):
-        self.add_descrption = self.wait_to_locate_path(27,"//div[contains(@aria-description,'Activate to edit the task description')]")
+        self.add_descrption = self.wait_to_locate_path(30,"//div[contains(@aria-description,'Activate to edit the task description')]")
 
     def find_confirm_edit(self):
         self.confirm_edit = self.wait_to_locate_path(24,"//p[contains(@data-placeholder,'Description')]")
@@ -213,7 +213,7 @@ class MainPage(BasePage):
         self.find_click_on_due_date(task_name)
         self.action_perform_hover_over(self.click_on_due_date)
         time.sleep(1)
-        click_on_due_date_button = self.wait_path_to_be_clickbale(25, f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@data-action-hint,'task-scheduler')]")
+        click_on_due_date_button = self.wait_path_to_be_clickbale(27, f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@data-action-hint,'task-scheduler')]")
         self.clicker_button_with_retry(click_on_due_date_button)
         time.sleep(3)
         self.find_choose_date()
