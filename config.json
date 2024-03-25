@@ -13,5 +13,6 @@
   "url_tasks_api": "https://api.todoist.com/rest/v2/tasks",
   "url_label_api": "https://api.todoist.com/rest/v2/labels",
   "headless": true,
-  "jira_url": "https://jobran4799.atlassian.net/"
+  "jira_url": "https://jobran4799.atlassian.net/",
+  "delay": 50
 }

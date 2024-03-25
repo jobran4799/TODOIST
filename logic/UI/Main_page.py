@@ -4,10 +4,17 @@ from infra.UI.Base_Page import BasePage
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+# import json
+# import os
+# from os.path import dirname as up
 class MainPage(BasePage):
     USER_NAME = (By.XPATH, "//span[text() = 'Beyonddev']")
     def __init__(self, driver):
         super().__init__(driver)
+        # cur_dir = up(up(up(up(os.path.abspath(__file__)))))
+        # config_location = os.path.join(cur_dir, 'config.json')
+        # with open(config_location) as f:
+        #     self.data = json.load(f)
         # self.init()
 
     def init(self):
@@ -18,10 +25,10 @@ class MainPage(BasePage):
         return self.user_name.is_displayed()
 
     def wait_to_locate_path(self, xpath):
-        return (WebDriverWait(self._driver, 23).until(EC.element_to_be_clickable((By.XPATH, xpath))))
+        return (WebDriverWait(self._driver, 50).until(EC.element_to_be_clickable((By.XPATH, xpath))))
 
     def wait_path_to_be_clickbale(self, xpath):
-        return (WebDriverWait(self._driver, 23).until(EC.presence_of_element_located((By.XPATH, xpath))))
+        return (WebDriverWait(self._driver, 50).until(EC.presence_of_element_located((By.XPATH, xpath))))
     def fill_input(self, element, text):
         WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(element)).send_keys(text)
 
