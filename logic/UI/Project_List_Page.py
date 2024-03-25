@@ -51,7 +51,7 @@ class ProjectListPage(BasePage):
 
 
     def find_add_project_clicker(self):
-        self.clicker_add_project = self.wait_to_locate_path(35, "//div[contains(@role,'menu')]//button[contains(@aria-label,'Add project')]")
+        self.clicker_add_project = self.wait_to_locate_path(35, "//button[contains(@aria-label,'Add project')]")
 
     def find_input_project_name(self):
         self.input_project_name = self.wait_to_locate_path(23, "//input[contains(@id,'edit_project_modal_field_name')]")
@@ -84,6 +84,7 @@ class ProjectListPage(BasePage):
         self.clicker_button_with_retry(self.project_list)
         time.sleep(2)
         self.find_add_project_clicker()
+        self.action_prform_hover_over(self.clicker_add_project)
         self.clicker_button_with_retry(self.clicker_add_project)
         self.find_input_project_name()
         self.fill_input(self.input_project_name, text_task_name)
