@@ -18,10 +18,10 @@ class MainPage(BasePage):
         return self.user_name.is_displayed()
 
     def wait_to_locate_path(self, xpath):
-        return (WebDriverWait(self._driver, 25).until(EC.element_to_be_clickable((By.XPATH, xpath))))
+        return (WebDriverWait(self._driver, 30).until(EC.element_to_be_clickable((By.XPATH, xpath))))
 
     def wait_path_to_be_clickbale(self, xpath):
-        return (WebDriverWait(self._driver, 25).until(EC.presence_of_element_located((By.XPATH, xpath))))
+        return (WebDriverWait(self._driver, 30).until(EC.presence_of_element_located((By.XPATH, xpath))))
     def fill_input(self, element, text):
         WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(element)).send_keys(text)
 
@@ -66,6 +66,7 @@ class MainPage(BasePage):
     def find_delete_requste(self):
         self.delete_requeste = self.wait_to_locate_path("//button[contains(@data-action-hint,'task-overflow-menu-delete')]")
 
+
     def find_confrmation_delete_requste(self):
         self.confirm_delete_requeste = self.wait_path_to_be_clickbale("//button[contains(@data-autofocus,'true')]")
 
@@ -96,6 +97,7 @@ class MainPage(BasePage):
         self.find_delete_requste()
         self.actions_perform(self.delete_requeste)
         self.action_perform_hover_over(self.delete_requeste)
+        self.wait_path_to_be_clickbale("//button[contains(@data-action-hint,'task-overflow-menu-delete')]")
 
         # WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(self.delete_requeste))
 
@@ -215,7 +217,8 @@ class MainPage(BasePage):
     def click_completed_task(self, task_name):
         self.completed_task = self.wait_path_to_be_clickbale( f"//div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]//button[contains(@class,'task_checkbox')]")
         # self.completed_task = self._driver.find_element(By.XPATH,  f"//div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]//button[contains(@class,'task_checkbox')]")
-        self.completed_task.click()
+        # self.completed_task.click()
+        self.clicker_button_with_retry(self.completed_task)
 
 
 
