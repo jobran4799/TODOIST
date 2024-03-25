@@ -110,7 +110,7 @@ class MainPage(BasePage):
 
 
     def find_task_inputs_to_edit_task(self, task_name):
-        self.inputs_to_edit_task = WebDriverWait(self._driver, 10).until(
+        self.inputs_to_edit_task = WebDriverWait(self._driver, 20).until(
             EC.presence_of_element_located((By.XPATH, f"//div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]"))
         )
 
@@ -217,8 +217,11 @@ class MainPage(BasePage):
 
 
     def click_completed_task(self, task_name):
-
-        self.completed_task = self._driver.find_element(By.XPATH,  f"//div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]//button[contains(@class,'task_checkbox')]")
+        self.completed_task = WebDriverWait(self._driver, 10).until(
+            EC.presence_of_element_located(
+                (By.XPATH, f"//div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]//button[contains(@class,'task_checkbox')]"))
+        )
+        # self.completed_task = self._driver.find_element(By.XPATH,  f"//div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]//button[contains(@class,'task_checkbox')]")
         self.completed_task.click()
 
 
