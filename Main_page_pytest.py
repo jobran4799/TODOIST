@@ -24,7 +24,7 @@ class TestMainPage:
     def test_task_creation(self, setup):
         driver, test_p = setup
         task_name = Utiles.generate_random_string(5)
-        main_page = MainPage(self.driver)
+        main_page = MainPage(driver)
         main_page.create_task(task_name)
         my_c_api = test_p.get_active_tasks()
         json_response = my_c_api.json()
