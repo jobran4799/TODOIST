@@ -28,7 +28,7 @@ class TestMainPage:
         self.driver.quit()
 
     def test_task_creation(self):
-        
+
         task_name = Utiles.generate_random_string(5)
         main_page = MainPage(self.driver)
         main_page.create_task(task_name)
@@ -51,7 +51,7 @@ class TestMainPage:
         self.pre_teardown()
 
     def test_task_deletion(self):
-        
+
         task_name = Utiles.generate_random_string(5)
         body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
         my_c_api = self.test_p.create_tasks(body)
@@ -62,7 +62,7 @@ class TestMainPage:
         self.pre_teardown()
 
     def test_task_set_due_date(self):
-        
+
         task_name = Utiles.generate_random_string(5)
         body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
         my_c_api = self.test_p.create_tasks(body)
@@ -73,7 +73,7 @@ class TestMainPage:
         self.pre_teardown()
 
     def test_task_compilation(self):
-        
+
         task_name = Utiles.generate_random_string(5)
         body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
         my_c_api = self.test_p.create_tasks(body)

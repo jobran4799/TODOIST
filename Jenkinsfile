@@ -1,56 +1,45 @@
 pipeline {
     agent any
 
-    environment {
-        // Define the Docker image name
-        IMAGE_NAME = 'tests'
-        TAG = 'latest'
-    }
-
     stages {
-         stage('Build Docker Image') {
-            steps {
-                script {
-                    def customImage = docker.build("${IMAGE_NAME}:${TAG}")
-               }
+        stages {
+            stage('Setup') {
+                steps {
+                    // Set up any necessary environment
+                    sh 'python -m pip install --upgrade pip'
+                    sh 'pip install -r requirements.txt'
+                }
             }
-        }
-        stage('Setup Selenium Server HUB') {
-            steps {
-                echo 'Setting up Selenium server HUB...'
-                bat "start /B java -jar selenium-server.jar hub"
-                // Delay for 10 seconds
-                bat 'ping 127.0.0.1 -n 11 > nul' // Windows command to sleep for 10 seconds
-            }
-        }
 
-       stage('Setup Selenium Server nodes') {
-            steps {
-                echo 'Setting up Selenium server nodes...'
-                bat "start /B java -jar selenium-server-4.17.0.jar node --port 5555 --selenium-manager true"
-                // Delay for 10 seconds
-                bat 'ping 127.0.0.1 -n 11 > nul' // Windows command to sleep for 10 seconds
+            stage('Run Tests') {
+                steps {
+                    // Run pytest tests
+                    sh 'pytest Main_page_pytest.py --html=report.html'
+                }
             }
-       }
 
-        stage('Run Tests') {
-            steps {
-                script {
-                    'API Test': {
-                        bat "docker run --name tests_example_run ${IMAGE_NAME}:${TAG} python tests_example_run.py"
-                        bat "docker rm tests_example_run"
-                    }
+            stage('Publish HTML Report') {
+                steps {
+                    // Archive HTML report as a build artifact
+                    archiveArtifacts artifacts: 'report.html', onlyIfSuccessful: true
+
+                    // Publish HTML report (optional, requires Jenkins HTML Publisher plugin)
+                    publishHTML(target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: false,
+                        reportDir: '',
+                        reportFiles: 'report.html',
+                        reportName: 'HTML Test Report'
+                    ])
                 }
             }
         }
-    }
 
-    post {
-        always {
-            echo 'Cleaning up...'
-            bat "docker rmi ${IMAGE_NAME}:${TAG}"
+        post {
+            always {
+                // Clean up any resources if necessary
+            }
         }
     }
 }
-
-
