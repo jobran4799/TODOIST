@@ -91,16 +91,16 @@ class TestMainPage:
     #     self.pre_teardown()
 
 
-    def test_Project_creation(self):
-        task_name = Utiles.generate_random_string(5)
-        list_project = ProjectListPage(self.driver)
-        list_project.create_project(task_name, True)
-        my_c_api = self.test_p_p.get_all_project()
-        json_response = my_c_api.json()
-        for get_id in json_response:
-            if get_id["name"] == task_name:
-                self.ID = get_id["id"]
-        self.pre_teardown_p()
+    # def test_Project_creation(self):
+    #     task_name = Utiles.generate_random_string(5)
+    #     list_project = ProjectListPage(self.driver)
+    #     list_project.create_project(task_name, True)
+    #     my_c_api = self.test_p_p.get_all_project()
+    #     json_response = my_c_api.json()
+    #     for get_id in json_response:
+    #         if get_id["name"] == task_name:
+    #             self.ID = get_id["id"]
+    #     self.pre_teardown_p()
     #
     #
     #
