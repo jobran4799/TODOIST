@@ -58,24 +58,24 @@ class TestMainPage:
         main_page = MainPage(self.driver)
         main_page.set_due_date_task(task_name)
 
-    def test_task_compilation(self, setup):
-        driver, test_p = setup
+    def test_task_compilation(self):
+
         task_name = Utiles.generate_random_string(5)
         body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
         my_c_api = self.test_p.create_tasks(body)
         json_response = my_c_api.json()
         self.ID = json_response["id"]
-        main_page = MainPage(driver)
+        main_page = MainPage(self.driver)
         main_page.click_completed_task(task_name)
 
-    def test_task_editing(self, setup):
-        driver, test_p = setup
+    def test_task_editing(self):
+
         task_name = Utiles.generate_random_string(5)
         body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
         my_c_api = self.test_p.create_tasks(body)
         json_response = my_c_api.json()
         self.ID = json_response["id"]
-        main_page = MainPage(driver)
+        main_page = MainPage(self.driver)
         main_page.edit_task(task_name)
 
 
