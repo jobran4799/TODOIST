@@ -64,18 +64,18 @@ class MainPage(BasePage):
 
 
     def find_task_inputs_to_delete_task(self, task_name):
-        self.task_delete_input = self.wait_to_locate_path(20, f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]")
+        self.task_delete_input = self.wait_to_locate_path(15, f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]")
 
 
     def find_more_menu_clicker(self, task_name):
         self.menu_clicker = self.wait_path_to_be_clickbale(20, f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@data-testid,'more_menu')]")
 
     def find_delete_requste(self):
-        self.delete_requeste = self.wait_to_locate_path(30, "//button[contains(@data-action-hint,'task-overflow-menu-delete')]")
+        self.delete_requeste = self.wait_to_locate_path(20, "//button[contains(@data-action-hint,'task-overflow-menu-delete')]")
 
 
     def find_confrmation_delete_requste(self):
-        self.confirm_delete_requeste = self.wait_path_to_be_clickbale(30, "//button[contains(@data-autofocus,'true')]")
+        self.confirm_delete_requeste = self.wait_path_to_be_clickbale(23, "//button[contains(@data-autofocus,'true')]")
 
     # def find_delete_requste_clickabel(self):
     #     self.delete_requested = self._driver.find_element(By.XPATH, "//button[contains(@data - tabindex, 'data-active-item')]")
