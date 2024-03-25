@@ -45,7 +45,10 @@ class ProjectListPage(BasePage):
     #     write_input.send_keys(Keys.ENTER)
 
     def find_projects_list(self):
-        self.project_list = self.wait_to_locate_path(40, "//button[@aria-label='My projects menu']")
+        self.project_list = self.wait_to_locate_path(23, "// div[contains(text(), 'My Projects')]")
+    def find_projects_menu(self):
+        self.project_list_meny = self.wait_to_locate_path(23, "//button[@aria-label='My projects menu']")
+
 
     def find_add_project_clicker(self):
         self.clicker_add_project = self.wait_path_to_be_clickbale(23, "//div[contains(@role,'menu')]//button[contains(@aria-label,'Add project')]")
@@ -77,6 +80,7 @@ class ProjectListPage(BasePage):
     def create_project(self, text_task_name, add_to_favorite):
         self.find_projects_list()
         self.action_prform_hover_over(self.project_list)
+        self.find_projects_menu()
         self.clicker_button_with_retry(self.project_list)
         time.sleep(2)
         self.find_add_project_clicker()
