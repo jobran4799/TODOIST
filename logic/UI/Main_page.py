@@ -166,16 +166,16 @@ class MainPage(BasePage):
 
     def find_menu_priority(self, task_name):
         xpath = f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@aria-label,'More task actions')]"
-        self.menu_priority = self.wait_path_to_be_clickbale(27, xpath)
+        self.menu_priority = self.wait_path_to_be_clickbale(10, xpath)
 
     def find_task_for_priority(self, task_name):
-        self.task_for_priority = self.wait_to_locate_path(24, f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]")
+        self.task_for_priority = self.wait_to_locate_path(10, f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]")
         # xpath = f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]"
         # self.task_for_priority = self._driver.find_element(By.XPATH, xpath)
 
     def find_choose_num_of_priority(self, priority_level):
         xpath = f"//button[contains(@aria-label,'Priority {priority_level}')]"
-        self.confirm_edit_priority = self.wait_to_locate_path(30, xpath)
+        self.confirm_edit_priority = self.wait_to_locate_path(10, xpath)
 
     def priority_task(self, task_name, priority_level):
         time.sleep(3)

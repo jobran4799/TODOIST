@@ -39,16 +39,16 @@ class TestMainPage:
                 self.ID = get_id["id"]
         self.pre_teardown()
 
-    # def test_task_priority(self):
-    #
-    #     task_name = Utiles.generate_random_string(5)
-    #     body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
-    #     my_c_api = self.test_p.create_tasks(body)
-    #     json_response = my_c_api.json()
-    #     self.ID = json_response["id"]
-    #     main_page = MainPage(self.driver)
-    #     main_page.priority_task(task_name, '3')
-    #     self.pre_teardown()
+    def test_task_priority(self):
+
+        task_name = Utiles.generate_random_string(5)
+        body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
+        my_c_api = self.test_p.create_tasks(body)
+        json_response = my_c_api.json()
+        self.ID = json_response["id"]
+        main_page = MainPage(self.driver)
+        main_page.priority_task(task_name, '3')
+        self.pre_teardown()
     #
     # def test_task_deletion(self):
     #
