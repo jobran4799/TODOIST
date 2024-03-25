@@ -18,13 +18,13 @@ class MainPage(BasePage):
         return self.user_name.is_displayed()
 
     def wait_to_locate_path(self, xpath):
-        return (WebDriverWait(self._driver, 20).until(
+        return (WebDriverWait(self._driver, 10).until(
             EC.element_to_be_clickable(
                 (By.XPATH, xpath))
         ))
 
     def wait_path_to_be_clickbale(self, xpath):
-        return (WebDriverWait(self._driver, 20).until(
+        return (WebDriverWait(self._driver, 10).until(
             EC.presence_of_element_located(
                 (By.XPATH, xpath))
         ))
@@ -59,7 +59,7 @@ class MainPage(BasePage):
 
         # Perform action only when the input field is ready
         self.add_task_name.send_keys(Keys.ENTER)
-        time.sleep(3)
+        time.sleep(2)
 
 
     def find_task_inputs_to_delete_task(self, task_name):
