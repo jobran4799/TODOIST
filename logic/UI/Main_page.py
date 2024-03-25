@@ -64,18 +64,18 @@ class MainPage(BasePage):
 
 
     def find_task_inputs_to_delete_task(self, task_name):
-        self.task_delete_input = self.wait_to_locate_path(27, f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]")
+        self.task_delete_input = self.wait_to_locate_path(30, f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]")
 
 
     def find_more_menu_clicker(self, task_name):
-        self.menu_clicker = self.wait_path_to_be_clickbale(27, f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@aria-label,'More task actions')]")
+        self.menu_clicker = self.wait_path_to_be_clickbale(30, f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@aria-label,'More task actions')]")
 
     def find_delete_requste(self):
         self.delete_requeste = self.wait_to_locate_path(30, "//button[contains(@data-action-hint,'task-overflow-menu-delete')]")
 
 
     def find_confrmation_delete_requste(self):
-        self.confirm_delete_requeste = self.wait_path_to_be_clickbale(27, "//button[contains(@data-autofocus,'true')]")
+        self.confirm_delete_requeste = self.wait_path_to_be_clickbale(30, "//button[contains(@data-autofocus,'true')]")
 
     # def find_delete_requste_clickabel(self):
     #     self.delete_requested = self._driver.find_element(By.XPATH, "//button[contains(@data - tabindex, 'data-active-item')]")
@@ -104,7 +104,7 @@ class MainPage(BasePage):
         self.find_delete_requste()
         self.actions_perform(self.delete_requeste)
         self.action_perform_hover_over(self.delete_requeste)
-        self.wait_path_to_be_clickbale(27, "//button[contains(@data-action-hint,'task-overflow-menu-delete')]")
+        self.wait_path_to_be_clickbale(30, "//button[contains(@data-action-hint,'task-overflow-menu-delete')]")
 
         # WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(self.delete_requeste))
 
@@ -169,13 +169,13 @@ class MainPage(BasePage):
         self.menu_priority = self.wait_path_to_be_clickbale(30, xpath)
 
     def find_task_for_priority(self, task_name):
-        self.task_for_priority = self.wait_to_locate_path(27, f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]")
+        self.task_for_priority = self.wait_to_locate_path(30, f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]")
         # xpath = f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]"
         # self.task_for_priority = self._driver.find_element(By.XPATH, xpath)
 
     def find_choose_num_of_priority(self, priority_level):
         xpath = f"//button[contains(@aria-label,'Priority {priority_level}')]"
-        self.confirm_edit_priority = self.wait_to_locate_path(27, xpath)
+        self.confirm_edit_priority = self.wait_to_locate_path(30, xpath)
 
     def priority_task(self, task_name, priority_level):
         time.sleep(3)
@@ -205,7 +205,7 @@ class MainPage(BasePage):
 
 
     def find_choose_date(self):
-        self.choose_date = self.wait_path_to_be_clickbale(25, "//div[@class='scheduler-suggestions']//button[contains(@data-action-hint,'scheduler-suggestion-tomorrow')]")
+        self.choose_date = self.wait_path_to_be_clickbale(22, "//div[@class='scheduler-suggestions']//button[contains(@data-action-hint,'scheduler-suggestion-tomorrow')]")
 
 
     def set_due_date_task(self, task_name):
