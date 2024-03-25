@@ -73,7 +73,7 @@ class MainPage(BasePage):
         actions.move_to_element(task_input).perform()
 
     def delete_task(self, task_name):
-        time.sleep(5)
+        time.sleep(3)
         self.find_task_inputs_to_delete_task(task_name)
 
         # Hover over the task element
@@ -85,7 +85,7 @@ class MainPage(BasePage):
 
         # Click the menu clicker button
         self.clicker_button_with_retry(self.menu_clicker)
-        time.sleep(5)
+        time.sleep(3)
         # Wait for the delete request button to be clickable
         self.find_delete_requste()
         self.actions_perform(self.delete_requeste)
@@ -96,7 +96,7 @@ class MainPage(BasePage):
         # Click the delete request button
         self.clicker_button_with_retry(self.delete_requeste)
         # Wait for the confirmation delete request button to be clickable
-        time.sleep(5)
+        time.sleep(3)
         self.find_confrmation_delete_requste()
         # WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(self.confirm_delete_requeste))
 
@@ -126,7 +126,7 @@ class MainPage(BasePage):
         print("Failed to click the element after multiple attempts")
 
     def edit_task(self, text_edit):
-        time.sleep(5)
+        time.sleep(3)
         # Click on the task edit
         self.find_task_inputs_to_edit_task(text_edit)
         self.clicker_button_with_retry(self.inputs_to_edit_task)
@@ -159,7 +159,7 @@ class MainPage(BasePage):
         self.confirm_edit_priority = self._driver.find_element(By.XPATH, xpath)
 
     def priority_task(self, task_name, priority_level):
-        time.sleep(5)
+        time.sleep(3)
         self.find_task_for_priority(task_name)
         self.action_perform_hover_over(self.task_for_priority)
 
@@ -189,7 +189,7 @@ class MainPage(BasePage):
 
 
     def set_due_date_task(self, task_name):
-        time.sleep(5)
+        time.sleep(3)
         self.find_click_on_due_date(task_name)
         self.action_perform_hover_over(self.click_on_due_date)
 
