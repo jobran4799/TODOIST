@@ -61,7 +61,7 @@ class MainPage(BasePage):
         self.delete_requeste = self._driver.find_element(By.XPATH, "//button[contains(@data-action-hint,'task-overflow-menu-delete')]")
 
     def find_confrmation_delete_requste(self):
-        self.confirm_delete_requeste = self._driver.find_element(By.XPATH, "//button[contains(@data-autofocus,'true')]")
+        self.confirm_delete_requeste = self._driver.find_element(By.XPATH, "//button[contains(@type,'submit')]")
 
     # def find_delete_requste_clickabel(self):
     #     self.delete_requested = self._driver.find_element(By.XPATH, "//button[contains(@data - tabindex, 'data-active-item')]")
@@ -130,7 +130,7 @@ class MainPage(BasePage):
         # Click on the task edit
         self.find_task_inputs_to_edit_task(text_edit)
         self.clicker_button_with_retry(self.inputs_to_edit_task)
-
+        time.sleep(3)
         # Wait for the add description element to appear
         add_description_element = self._driver.find_element(By.XPATH, "//div[contains(@aria-label,'Task description')]")
 
@@ -141,7 +141,7 @@ class MainPage(BasePage):
         self.find_confirm_edit()  # Assuming confirm edit element is constant after clicking on add description
         confirm_edit_element = self.confirm_edit
         confirm_edit_element.send_keys(text_edit)
-
+        time.sleep(1)
         # Click Enter to confirm the edit
         self.click_enter(confirm_edit_element)
 
@@ -189,7 +189,7 @@ class MainPage(BasePage):
 
 
     def set_due_date_task(self, task_name):
-
+        time.sleep(5)
         self.find_click_on_due_date(task_name)
         self.action_perform_hover_over(self.click_on_due_date)
 
