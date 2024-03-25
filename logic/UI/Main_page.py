@@ -38,10 +38,9 @@ class MainPage(BasePage):
         self.add_task_name = self._driver.find_element(By.XPATH, "//div[contains(@aria-label,'Task name')]//p[@data-placeholder='Task name']")
 
     def create_task(self, text_task_name):
-        task_input = WebDriverWait(self._driver, 10).until(
-            EC.visibility_of_element_located((By.XPATH, "//button[contains(text(),'Add task')]"))
-        )
-        task_input.click()
+        time.sleep(2)
+        self.find_task_inputs_to_add_task()
+        self.task_input.click()
 
         # Wait for the add task name input field to be visible
         self.find_add_task_name_to_add_task()
@@ -56,16 +55,16 @@ class MainPage(BasePage):
         self.task_delete_input = self._driver.find_element(By.XPATH,  f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]")
 
     def find_more_menu_clicker(self, task_name):
-        self.menu_clicker = self._driver.find_element(By.XPATH,  f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@data-testid,'more_menu')]")
+        self.menu_clicker = self._driver.find_element(By.XPATH,  f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@aria-label,'More task actions')]")
 
     def find_delete_requste(self):
-        self.delete_requeste = self._driver.find_element(By.XPATH, "//button[contains(@data-tabindex,'task-overflow-menu-delete')]")
+        self.delete_requeste = self._driver.find_element(By.XPATH, "//button[contains(@data-action-hint,'task-overflow-menu-delete')]")
 
     def find_confrmation_delete_requste(self):
         self.confirm_delete_requeste = self._driver.find_element(By.XPATH, "//button[contains(@data-autofocus,'true')]")
 
-    def find_delete_requste_clickabel(self):
-        self.delete_requested = self._driver.find_element(By.XPATH, "//button[contains(@data - tabindex, 'data-active-item')]")
+    # def find_delete_requste_clickabel(self):
+    #     self.delete_requested = self._driver.find_element(By.XPATH, "//button[contains(@data - tabindex, 'data-active-item')]")
 
 
 
@@ -74,7 +73,7 @@ class MainPage(BasePage):
         actions.move_to_element(task_input).perform()
 
     def delete_task(self, task_name):
-
+        time.sleep(5)
         self.find_task_inputs_to_delete_task(task_name)
 
         # Hover over the task element
@@ -86,16 +85,18 @@ class MainPage(BasePage):
 
         # Click the menu clicker button
         self.clicker_button_with_retry(self.menu_clicker)
-
+        time.sleep(5)
         # Wait for the delete request button to be clickable
         self.find_delete_requste()
+        self.actions_perform(self.delete_requeste)
         self.action_perform_hover_over(self.delete_requeste)
-        self.find_delete_requste_clickabel()
+
         # WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(self.delete_requeste))
 
         # Click the delete request button
-        self.clicker_button_with_retry(self.delete_requested)
+        self.clicker_button_with_retry(self.delete_requeste)
         # Wait for the confirmation delete request button to be clickable
+        time.sleep(5)
         self.find_confrmation_delete_requste()
         # WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(self.confirm_delete_requeste))
 
@@ -125,7 +126,7 @@ class MainPage(BasePage):
         print("Failed to click the element after multiple attempts")
 
     def edit_task(self, text_edit):
-
+        time.sleep(5)
         # Click on the task edit
         self.find_task_inputs_to_edit_task(text_edit)
         self.clicker_button_with_retry(self.inputs_to_edit_task)
@@ -156,10 +157,9 @@ class MainPage(BasePage):
     def find_choose_num_of_priority(self, priority_level):
         xpath = f"//button[contains(@aria-label,'Priority {priority_level}')]"
         self.confirm_edit_priority = self._driver.find_element(By.XPATH, xpath)
-        WebDriverWait(self._driver, 10).until(EC.visibility_of_element_located(self.confirm_edit_priority))
 
     def priority_task(self, task_name, priority_level):
-
+        time.sleep(5)
         self.find_task_for_priority(task_name)
         self.action_perform_hover_over(self.task_for_priority)
 
@@ -173,7 +173,7 @@ class MainPage(BasePage):
         # Click on the menu button
         self.clicker_button_with_retry(self.menu_priority)
 
-
+        time.sleep(3)
         self.find_choose_num_of_priority(priority_level)
         # Wait for the priority option to appear
         # WebDriverWait(self._driver, 10).until(
@@ -185,7 +185,7 @@ class MainPage(BasePage):
         self.click_on_due_date = self._driver.find_element(By.XPATH, f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]")
 
     def find_choose_date(self):
-        self.choose_date = self._driver.find_element(By.XPATH, "//button[contains(@data-action-hint,'scheduler-suggestion-nextWeek')]")
+        self.choose_date = self._driver.find_element(By.XPATH, "//div[@class='scheduler-suggestions']//button[contains(@data-action-hint,'scheduler-suggestion-tomorrow')]")
 
 
     def set_due_date_task(self, task_name):
@@ -193,9 +193,9 @@ class MainPage(BasePage):
         self.find_click_on_due_date(task_name)
         self.action_perform_hover_over(self.click_on_due_date)
 
-        click_on_due_date_button = self._driver.find_element(By.XPATH,f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@aria-label, 'Due date')]")
+        click_on_due_date_button = self._driver.find_element(By.XPATH, f"//li[./div[./div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]]]//button[contains(@data-action-hint,'task-scheduler')]")
         self.clicker_button_with_retry(click_on_due_date_button)
-
+        time.sleep(3)
         self.find_choose_date()
         self.clicker_button_with_retry(self.choose_date)
 

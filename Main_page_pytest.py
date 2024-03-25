@@ -46,7 +46,6 @@ class TestMainPage:
         my_c_api = self.test_p.create_tasks(body)
         json_response = my_c_api.json()
         self.ID = json_response["id"]
-        self.TODELETED = False
         main_page = MainPage(self.driver)
         main_page.delete_task(task_name)
 
@@ -66,7 +65,6 @@ class TestMainPage:
         my_c_api = self.test_p.create_tasks(body)
         json_response = my_c_api.json()
         self.ID = json_response["id"]
-        self.TODELETED = False
         main_page = MainPage(driver)
         main_page.click_completed_task(task_name)
 

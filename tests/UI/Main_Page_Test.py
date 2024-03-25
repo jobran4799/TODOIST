@@ -25,7 +25,9 @@ class Main_page_test(unittest.TestCase):
         main_page.create_task(task_name)
         my_c_api = self.test_p.get_active_tasks()
         json_response = my_c_api.json()
-        self.ID = json_response[0]["id"]
+        for get_id in json_response:
+            if get_id["content"] == task_name:
+                self.ID = get_id["id"]
         time.sleep(2)
         self.assertTrue(main_page, "No match between the tasks name")
 
@@ -35,8 +37,6 @@ class Main_page_test(unittest.TestCase):
         my_c_api = self.test_p.create_tasks(body)
         json_response = my_c_api.json()
         self.ID = json_response["id"]
-        self.ISDELETED = True
-        time.sleep(5)
         main_page = MainPage(self.driver)
         main_page.delete_task(task_name)
         time.sleep(2)
@@ -48,8 +48,6 @@ class Main_page_test(unittest.TestCase):
         my_c_api = self.test_p.create_tasks(body)
         json_response = my_c_api.json()
         self.ID = json_response["id"]
-        self.ISDELETED = True
-        time.sleep(2)
         main_page = MainPage(self.driver)
         main_page.click_completed_task(task_name)
         time.sleep(2)
@@ -74,7 +72,7 @@ class Main_page_test(unittest.TestCase):
         json_response = my_c_api.json()
         self.ID = json_response["id"]
         main_page = MainPage(self.driver)
-        main_page.priority_task(task_name, 3)
+        main_page.priority_task(task_name, '3')
         self.assertTrue(main_page, "priority does not selected")
 
     def test_Task_set_due_data(self):
