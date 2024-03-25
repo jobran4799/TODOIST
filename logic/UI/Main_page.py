@@ -78,7 +78,7 @@ class MainPage(BasePage):
 
         # Hover over the task element
         self.action_perform_hover_over(self.task_delete_input)
-
+        time.sleep(2)
         # Wait for the menu clicker button to be clickable
         self.find_more_menu_clicker(task_name)
         # WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(self.menu_clicker))
@@ -136,12 +136,12 @@ class MainPage(BasePage):
 
         # Click on the add description element
         self.clicker_button_with_retry(add_description_element)
-
+        time.sleep(2)
         # Send keys to the confirm edit element
         self.find_confirm_edit()  # Assuming confirm edit element is constant after clicking on add description
         confirm_edit_element = self.confirm_edit
         confirm_edit_element.send_keys(text_edit)
-        time.sleep(1)
+        time.sleep(2)
         # Click Enter to confirm the edit
         self.click_enter(confirm_edit_element)
 
