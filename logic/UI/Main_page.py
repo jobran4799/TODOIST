@@ -108,7 +108,6 @@ class MainPage(BasePage):
         # Click the delete request button
         self.clicker_button_with_retry(self.delete_requeste)
         # Wait for the confirmation delete request button to be clickable
-        time.sleep(3)
         self.find_confrmation_delete_requste()
         # WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(self.confirm_delete_requeste))
 
@@ -127,7 +126,7 @@ class MainPage(BasePage):
         self.confirm_edit = self.wait_to_locate_path("//p[contains(@data-placeholder,'Description')]")
 
     def clicker_button_with_retry(self, element):
-        retry_attempts = 3
+        retry_attempts = 5
         for _ in range(retry_attempts):
             try:
                 element.click()
@@ -179,6 +178,7 @@ class MainPage(BasePage):
         time.sleep(3)
         self.find_task_for_priority(task_name)
         self.action_perform_hover_over(self.task_for_priority)
+        time.sleep(3)
         self.find_menu_priority(task_name)
         # Wait for the menu to appea
         # WebDriverWait(self._driver, 10).until(EC.visibility_of_element_located(self.menu_priority)
