@@ -11,9 +11,13 @@ from logic.UI.Main_page import MainPage
 class Main_page_test(unittest.TestCase):
     ID = None
     ISDELETED = False
+    BROWSER = None
     def setUp(self):
         self.browser_wrapper = BrowserWrapper()
-        self.driver = self.browser_wrapper.get_driver("chrome")
+        if self.BROWSER == None:
+            self.driver = self.browser_wrapper.get_driver("chrome")
+        else:
+            self.driver = self.browser_wrapper.get_driver(self.BROWSER)
         self.my_api = APIWrapper()
         self.test_p = Tasks(self.my_api)
         login = LoginPage(self.driver)
