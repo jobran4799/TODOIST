@@ -14,6 +14,7 @@ from logic.UI.Main_page import MainPage
 class TestMainPage:
     ID = None
     TODELETED = True
+    CREATE_ISSU= False
     def setup_method(self):
         self.browser_wrapper = BrowserWrapper()
         self.driver = self.browser_wrapper.get_driver("chrome")
@@ -26,6 +27,8 @@ class TestMainPage:
     def pre_teardown(self):
         if self.TODELETED:
             my_c_api = self.test_p.delete_tasks(self.ID)
+        if self.CREATE_ISSU:
+            Utiles.create_jira_issue("test is faild", "see report.html file for more info")
 
 
     # def check_the_result_of_test(self):
@@ -39,13 +42,13 @@ class TestMainPage:
     #                 error_message += f"Test: {test}\n"
     #                 error_message += f"Error: {traceback_text}\n"
     #             create_jira_issue(f"{test_method_name} Test Failed", error_message)
-    @pytest.fixture(autouse=True)
-    def create_jira_issue_on_failure(self, request):
-        yield
-        if request.node.rep_call.failed:
-            test_method_name = request.node.name
-            error_message = "\n".join(traceback.format_exception(*request.node.rep_call.longrepr))
-            Utiles.create_jira_issue(f"{test_method_name} Test Failed", error_message)
+    # @pytest.fixture(autouse=True)
+    # def create_jira_issue_on_failure(self, request):
+    #     yield
+    #     if request.node.rep_call.failed:
+    #         test_method_name = request.node.name
+    #         error_message = "\n".join(traceback.format_exception(*request.node.rep_call.longrepr))
+    #         Utiles.create_jira_issue(f"{test_method_name} Test Failed", error_message)
 
 
     def teardown_method(self):
@@ -71,6 +74,8 @@ class TestMainPage:
         for get_id in json_response:
             if get_id["content"] == task_name:
                 self.ID = get_id["id"]
+        if not main_page:
+            self.CREATE_ISSU = True
         self.pre_teardown()
 
     def test_task_priority(self):
