@@ -27,8 +27,10 @@ class TestMainPage:
     def pre_teardown(self):
         if self.TODELETED:
             my_c_api = self.test_p.delete_tasks(self.ID)
-        if self.CREATE_ISSU:
-            Utiles.create_jira_issue("test is faild", "see report.html file for more info")
+        if hasattr(self, '_outcome') and self._outcome.result:
+            result = self._outcome.result
+            if result.errors or result.failures:
+                Utiles.create_jira_issue("test is faild", "see report.html file for more info")
 
 
     # def check_the_result_of_test(self):
@@ -52,9 +54,6 @@ class TestMainPage:
 
 
     def teardown_method(self):
-        # if hasattr(self, '_outcome') and self._outcome.result:
-        #     result = self._outcome.result
-        #     if result.errors or result.failures:
         #         # If test fails, create a JIRA issue
         #         test_method_name = self._testMethodName
         #         error_message = ""
@@ -74,8 +73,7 @@ class TestMainPage:
         for get_id in json_response:
             if get_id["content"] == task_name:
                 self.ID = get_id["id"]
-        if not main_page:
-            self.CREATE_ISSU = True
+        
         self.pre_teardown()
 
     def test_task_priority(self):
@@ -87,8 +85,7 @@ class TestMainPage:
         self.ID = json_response["id"]
         main_page = MainPage(self.driver)
         main_page.priority_task(task_name, '3')
-        if not main_page:
-            self.CREATE_ISSU = True
+        
         self.pre_teardown()
 
     # def test_task_deletion(self):
@@ -110,8 +107,7 @@ class TestMainPage:
         self.ID = json_response["id"]
         main_page = MainPage(self.driver)
         main_page.click_completed_task(task_name)
-        if not main_page:
-            self.CREATE_ISSU = True
+        
         self.pre_teardown()
 
     # def test_task_set_due_date(self):
