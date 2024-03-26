@@ -2,9 +2,8 @@
 import json
 import unittest
 from infra.UI.Brawser_Wrapper import BrowserWrapper
-from tests.UI.Log_In_Page_Test import Login_page_test
 from tests.UI.Main_Page_Test import Main_page_test
-from tests.UI.Projects_List_Page_Test import Project_List_Page_Test
+from concurrent.futures import ThreadPoolExecutor
 
 try:
     with open('config.json') as f:
@@ -16,9 +15,9 @@ except FileNotFoundError:
 list_test_cases_runer = [Main_page_test]
 
 
-def test_brawser_runer():
+def test_brawser_runer(browser):
     for test_cases in list_test_cases_runer:
-        # test_cases.browser = browser
+        test_cases.BROWSER = browser
         test_suite = unittest.TestLoader().loadTestsFromTestCase(test_cases)
         print(test_suite)
         unittest.TextTestRunner().run(test_suite)
@@ -26,5 +25,15 @@ def test_brawser_runer():
 
 if __name__ == "__main__":
     browser_wrapper = BrowserWrapper()
+    parallel = data["parallel"]
+    serial = data["serial"]
     get_browser = data["browser"]
-    test_brawser_runer()
+    browsers = data["browser_types"]
+    if parallel:
+        with ThreadPoolExecutor(max_workers=len(browsers)) as executor:
+            executor.map(test_brawser_runer, browsers)
+    elif serial:
+        for browser in browsers:
+            test_brawser_runer(browser)
+    else:
+        test_brawser_runer(get_browser)

@@ -12,7 +12,7 @@ from tests.UI.Main_Page_Test import Main_page_test
 from tests.UI.Projects_List_Page_Test import Project_List_Page_Test
 
 try:
-    with open('config.json') as f:
+    with open('../config.json') as f:
         data = json.load(f)
 except FileNotFoundError:
     print("Error: 'config.json' file not found. Make sure the file exists in the correct location.")

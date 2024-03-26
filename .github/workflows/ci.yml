@@ -20,10 +20,26 @@ jobs:
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+    - name: Start Selenium Grid Hub
+      run: java -jar selenium-server-4.17.0.jar hub
+
+    - name: Start Selenium Grid Node
+      run: java -jar selenium-server-4.17.0.jar node --port 5555 --selenium-manager true
+
     - name: Setup ChromeDriver
       uses: browser-actions/setup-chrome@latest
       with:
         chrome-version: latest
+
+    - name: Setup Edge WebDriver
+      uses: browser-actions/setup-edge@latest
+      with:
+        edge-version: latest
+
+    - name: Setup Firefox WebDriver
+      uses: browser-actions/setup-firefox@latest
+      with:
+        firefox-version: latest
 
     - name: Run unitest tests
       run: python tests_example_run.py
@@ -38,3 +54,45 @@ jobs:
       with:
         name: pytest-html-report
         path: report
+
+
+#name: Run pytest tests
+#
+#on: [push]
+#
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#    - name: Checkout code
+#      uses: actions/checkout@v2
+#
+#    - name: Set up Python
+#      uses: actions/setup-python@v2
+#      with:
+#        python-version: '3.12.0'
+#
+#    - name: Install dependencies
+#      run: |
+#        python -m pip install --upgrade pip
+#        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+#
+#    - name: Setup ChromeDriver
+#      uses: browser-actions/setup-chrome@latest
+#      with:
+#        chrome-version: latest
+#
+#    - name: Run unitest tests
+#      run: python tests_example_run.py
+#      continue-on-error: true
+#
+#    - name: Run pytest tests and generate HTML report
+#      run: pytest Main_page_pytest.py --html=report/report.html
+#      continue-on-error: true
+#
+#    - name: Upload HTML report as artifact
+#      uses: actions/upload-artifact@v2
+#      with:
+#        name: pytest-html-report
+#        path: report

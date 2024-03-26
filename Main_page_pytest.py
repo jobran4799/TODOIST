@@ -15,9 +15,13 @@ class TestMainPage:
     ID = None
     TODELETED = True
     CREATE_ISSU= False
+    BROWSER = None
     def setup_method(self):
         self.browser_wrapper = BrowserWrapper()
-        self.driver = self.browser_wrapper.get_driver("chrome")
+        if self.BROWSER == None:
+            self.driver = self.browser_wrapper.get_driver("chrome")
+        else:
+            self.driver = self.browser_wrapper.get_driver(self.BROWSER)
         self.my_api = APIWrapper()
         self.test_p = Tasks(self.my_api)
         login = LoginPage(self.driver)
@@ -33,34 +37,8 @@ class TestMainPage:
                 Utiles.create_jira_issue("test is faild", "see report.html file for more info")
 
 
-    # def check_the_result_of_test(self):
-    #     if hasattr(self, '_outcome') and self._outcome.result:
-    #         result = self._outcome.result
-    #         if result.errors or result.failures:
-    #             # If test fails, create a JIRA issue
-    #             test_method_name = self._testMethodName
-    #             error_message = ""
-    #             for test, traceback_text in result.errors + result.failures:
-    #                 error_message += f"Test: {test}\n"
-    #                 error_message += f"Error: {traceback_text}\n"
-    #             create_jira_issue(f"{test_method_name} Test Failed", error_message)
-    # @pytest.fixture(autouse=True)
-    # def create_jira_issue_on_failure(self, request):
-    #     yield
-    #     if request.node.rep_call.failed:
-    #         test_method_name = request.node.name
-    #         error_message = "\n".join(traceback.format_exception(*request.node.rep_call.longrepr))
-    #         Utiles.create_jira_issue(f"{test_method_name} Test Failed", error_message)
-
 
     def teardown_method(self):
-        #         # If test fails, create a JIRA issue
-        #         test_method_name = self._testMethodName
-        #         error_message = ""
-        #         for test, traceback_text in result.errors + result.failures:
-        #             error_message += f"Test: {test}\n"
-        #             error_message += f"Error: {traceback_text}\n"
-        #         Utiles.create_jira_issue(f"{test_method_name} Test Failed", error_message)
         self.driver.quit()
 
     def test_task_creation(self):
