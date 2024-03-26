@@ -36,10 +36,10 @@ jobs:
 #      with:
 #        edge-version: latest
 
-    - name: Setup Firefox WebDriver
-      uses: browser-actions/setup-firefox@latest
-      with:
-        firefox-version: latest
+#    - name: Setup Firefox WebDriver
+#      uses: browser-actions/setup-firefox@latest
+#      with:
+#        firefox-version: latest
 
     - name: Run unitest tests
       run: python tests_example_run.py
