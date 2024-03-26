@@ -31,10 +31,10 @@ jobs:
       with:
         chrome-version: latest
 
-    - name: Setup Edge WebDriver
-      uses: browser-actions/setup-edge@latest
-      with:
-        edge-version: latest
+#    - name: Setup Edge WebDriver
+#      uses: browser-actions/setup-edge@latest
+#      with:
+#        edge-version: latest
 
     - name: Setup Firefox WebDriver
       uses: browser-actions/setup-firefox@latest
