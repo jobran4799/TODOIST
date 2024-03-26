@@ -5,7 +5,7 @@ from logic.API.API_projects import Project
 from logic.API.API_tasks import Tasks
 from logic.UI.Log_in_page import LoginPage
 from logic.UI.Main_page import MainPage
-from logic.UI.Project_List_Page import ProjectListPage
+
 
 
 class TestMainPage:
@@ -16,7 +16,6 @@ class TestMainPage:
         self.driver = self.browser_wrapper.get_driver("chrome")
         self.my_api = APIWrapper()
         self.test_p = Tasks(self.my_api)
-        self.test_p_p = Project(self.my_api)
         login = LoginPage(self.driver)
         login.fllow_log_in_test("beyonddevtestproject@gmail.com", "Zxcvbnm123")
 
@@ -24,10 +23,6 @@ class TestMainPage:
     def pre_teardown(self):
         if self.TODELETED:
             my_c_api = self.test_p.delete_tasks(self.ID)
-
-    def pre_teardown_p(self):
-        if self.TODELETED:
-            my_c_api = self.test_p_p.delete_project_by_id(self.ID)
 
 
     def teardown_method(self):
@@ -90,29 +85,6 @@ class TestMainPage:
     #     main_page.set_due_date_task(task_name)
     #     self.pre_teardown()
 
-
-    # def test_Project_creation(self):
-    #     task_name = Utiles.generate_random_string(5)
-    #     list_project = ProjectListPage(self.driver)
-    #     list_project.create_project(task_name, True)
-    #     my_c_api = self.test_p_p.get_all_project()
-    #     json_response = my_c_api.json()
-    #     for get_id in json_response:
-    #         if get_id["name"] == task_name:
-    #             self.ID = get_id["id"]
-    #     self.pre_teardown_p()
-    #
-    #
-    #
-    # def test_Project_deletion(self):
-    #     task_name = Utiles.generate_random_string(5)
-    #     body = {"name": task_name}
-    #     my_c_api = self.test_p_p.Create_a_new_project(body)
-    #     json_response = my_c_api.json()
-    #     self.ID = json_response["id"]
-    #     list_project = ProjectListPage(self.driver)
-    #     list_project.delete_task(task_name)
-    #     self.pre_teardown_p()
 
     # def test_task_editing(self):
     #
