@@ -222,7 +222,7 @@ class MainPage(BasePage):
 
 
     def click_completed_task(self, task_name):
-        self.completed_task = self.wait_path_to_be_clickbale(25, f"//div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]//button[contains(@class,'task_checkbox')]")
+        self.completed_task = self.wait_path_to_be_clickbale(30, f"//div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]//button[contains(@class,'task_checkbox')]")
         # self.completed_task = self._driver.find_element(By.XPATH,  f"//div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]//button[contains(@class,'task_checkbox')]")
         # self.completed_task.click()
         self.clicker_button_with_retry(self.completed_task)
