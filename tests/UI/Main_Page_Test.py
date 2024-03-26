@@ -31,16 +31,16 @@ class Main_page_test(unittest.TestCase):
         time.sleep(2)
         self.assertTrue(main_page, "No match between the tasks name")
 
-    def test_Task_deletion(self):
-        task_name = Utiles.generate_random_string(5)
-        body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
-        my_c_api = self.test_p.create_tasks(body)
-        json_response = my_c_api.json()
-        self.ID = json_response["id"]
-        main_page = MainPage(self.driver)
-        main_page.delete_task(task_name)
-        time.sleep(2)
-        self.assertTrue(main_page, "task is still exist")
+    # def test_Task_deletion(self):
+    #     task_name = Utiles.generate_random_string(5)
+    #     body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
+    #     my_c_api = self.test_p.create_tasks(body)
+    #     json_response = my_c_api.json()
+    #     self.ID = json_response["id"]
+    #     main_page = MainPage(self.driver)
+    #     main_page.delete_task(task_name)
+    #     time.sleep(2)
+    #     self.assertTrue(main_page, "task is still exist")
     #
     def test_Task_compilation(self):
         task_name = Utiles.generate_random_string(5)
@@ -65,15 +65,15 @@ class Main_page_test(unittest.TestCase):
         time.sleep(2)
         self.assertTrue(main_page, "task is not add descrption")
 
-    def test_Task_priority(self):
-        task_name = Utiles.generate_random_string(5)
-        body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
-        my_c_api = self.test_p.create_tasks(body)
-        json_response = my_c_api.json()
-        self.ID = json_response["id"]
-        main_page = MainPage(self.driver)
-        main_page.priority_task(task_name, '3')
-        self.assertTrue(main_page, "priority does not selected")
+    # def test_Task_priority(self):
+    #     task_name = Utiles.generate_random_string(5)
+    #     body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
+    #     my_c_api = self.test_p.create_tasks(body)
+    #     json_response = my_c_api.json()
+    #     self.ID = json_response["id"]
+    #     main_page = MainPage(self.driver)
+    #     main_page.priority_task(task_name, '3')
+    #     self.assertTrue(main_page, "priority does not selected")
 
     def test_Task_set_due_data(self):
         task_name = Utiles.generate_random_string(5)

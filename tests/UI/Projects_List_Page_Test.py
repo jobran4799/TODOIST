@@ -14,7 +14,7 @@ class Project_List_Page_Test(unittest.TestCase):
     ISDELETED = False
     def setUp(self):
         self.browser_wrapper = BrowserWrapper()
-        self.driver = self.browser_wrapper.get_driver(self.browser)
+        self.driver = self.browser_wrapper.get_driver('chrome')
         self.my_api = APIWrapper()
         self.test_p = Project(self.my_api)
         login = LoginPage(self.driver)
