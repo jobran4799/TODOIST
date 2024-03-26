@@ -87,6 +87,8 @@ class TestMainPage:
         self.ID = json_response["id"]
         main_page = MainPage(self.driver)
         main_page.priority_task(task_name, '3')
+        if not main_page:
+            self.CREATE_ISSU = True
         self.pre_teardown()
 
     # def test_task_deletion(self):
@@ -108,6 +110,8 @@ class TestMainPage:
         self.ID = json_response["id"]
         main_page = MainPage(self.driver)
         main_page.click_completed_task(task_name)
+        if not main_page:
+            self.CREATE_ISSU = True
         self.pre_teardown()
 
     # def test_task_set_due_date(self):
