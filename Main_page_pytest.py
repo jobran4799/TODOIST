@@ -1,7 +1,6 @@
 from infra.API.API_wrapper import APIWrapper
 from infra.UI.Brawser_Wrapper import BrowserWrapper
 from infra.utils import Utiles
-from logic.API.API_projects import Project
 from logic.API.API_tasks import Tasks
 from logic.UI.Log_in_page import LoginPage
 from logic.UI.Main_page import MainPage
@@ -24,10 +23,32 @@ class TestMainPage:
         if self.TODELETED:
             my_c_api = self.test_p.delete_tasks(self.ID)
 
+    # def check_the_result_of_test(self):
+    #     if hasattr(self, '_outcome') and self._outcome.result:
+    #         result = self._outcome.result
+    #         if result.errors or result.failures:
+    #             # If test fails, create a JIRA issue
+    #             test_method_name = self._testMethodName
+    #             error_message = ""
+    #             for test, traceback_text in result.errors + result.failures:
+    #                 error_message += f"Test: {test}\n"
+    #                 error_message += f"Error: {traceback_text}\n"
+    #             create_jira_issue(f"{test_method_name} Test Failed", error_message)
 
     def teardown_method(self):
         if self.TODELETED:
             my_c_api = self.test_p.delete_tasks(self.ID)
+
+        if hasattr(self, '_outcome') and self._outcome.result:
+            result = self._outcome.result
+            if result.errors or result.failures:
+                # If test fails, create a JIRA issue
+                test_method_name = self._testMethodName
+                error_message = ""
+                for test, traceback_text in result.errors + result.failures:
+                    error_message += f"Test: {test}\n"
+                    error_message += f"Error: {traceback_text}\n"
+                Utiles.create_jira_issue(f"{test_method_name} Test Failed", error_message)
         self.driver.quit()
 
     def test_task_creation(self):
