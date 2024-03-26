@@ -2,7 +2,7 @@
   "hub" : "http://10.0.0.6:4444",
   "url":"https://app.todoist.com/",
   "grid": false,
-  "parallel": false,
+  "parallel": true,
   "serial": false,
   "browser": "chrome",
   "platform": "windows",
