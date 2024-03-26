@@ -13,6 +13,9 @@
   "url_tasks_api": "https://api.todoist.com/rest/v2/tasks",
   "url_label_api": "https://api.todoist.com/rest/v2/labels",
   "headless": true,
+  "delay": 50,
+  "jira_token": "jobranATATT3xFfGF0hJzg86NsT58FVFVvEFoJ1IP7HwjVxYocgNNeqdyoOIgaD6piSOhL8i0atrIWY5_r2jDLUotbQJK4FtB0VMjShm5WaFtLfhu8Y1Jy20bPjfP0fX02sbsQmKgOBWHeamIbPUV7PT2LlsXd5rHUGL9b1zN4X-xQ4_yKpsnn-DxWj6U=F4AD1D9B",
+  "jira_email": "jobran4799@gmail.com",
   "jira_url": "https://jobran4799.atlassian.net/",
-  "delay": 50
+  "project_token":"TD"
 }

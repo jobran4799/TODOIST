@@ -7,7 +7,7 @@ from logic.UI.Main_page import MainPage
 class Login_page_test(unittest.TestCase):
     def setUp(self):
         self.browser_wrapper = BrowserWrapper()
-        self.driver = self.browser_wrapper.get_driver(self.browser)
+        self.driver = self.browser_wrapper.get_driver('chrome')
 
     def test_navigate_to_todoist_web(self):
         test_navigate = LoginPage(self.driver)

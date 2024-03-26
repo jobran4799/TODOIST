@@ -2,7 +2,9 @@
 import json
 import unittest
 from infra.UI.Brawser_Wrapper import BrowserWrapper
+from tests.UI.Log_In_Page_Test import Login_page_test
 from tests.UI.Main_Page_Test import Main_page_test
+from tests.UI.Projects_List_Page_Test import Project_List_Page_Test
 
 try:
     with open('config.json') as f:

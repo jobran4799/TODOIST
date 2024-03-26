@@ -25,6 +25,10 @@ jobs:
       with:
         chrome-version: latest
 
+    - name: Run unitest tests
+      run: python tests_example_run.py
+      continue-on-error: true
+
     - name: Run pytest tests and generate HTML report
       run: pytest Main_page_pytest.py --html=report/report.html
       continue-on-error: true
