@@ -1,7 +1,4 @@
-import traceback
-
 import pytest
-
 from infra.API.API_wrapper import APIWrapper
 from infra.UI.Brawser_Wrapper import BrowserWrapper
 from infra.utils import Utiles
@@ -31,11 +28,6 @@ class TestMainPage:
     def pre_teardown(self):
         if self.TODELETED:
             my_c_api = self.test_p.delete_tasks(self.ID)
-        if hasattr(self, '_outcome') and self._outcome.result:
-            result = self._outcome.result
-            if result.errors or result.failures:
-                Utiles.create_jira_issue("test is faild", "see report.html file for more info")
-
 
 
     def teardown_method(self):
@@ -66,16 +58,6 @@ class TestMainPage:
         
         self.pre_teardown()
 
-    # def test_task_deletion(self):
-    #
-    #     task_name = Utiles.generate_random_string(5)
-    #     body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
-    #     my_c_api = self.test_p.create_tasks(body)
-    #     json_response = my_c_api.json()
-    #     self.ID = json_response["id"]
-    #     main_page = MainPage(self.driver)
-    #     main_page.delete_task(task_name)
-    #     self.pre_teardown()
     def test_task_compilation(self):
 
         task_name = Utiles.generate_random_string(5)
@@ -87,6 +69,16 @@ class TestMainPage:
         main_page.click_completed_task(task_name)
         
         self.pre_teardown()
+
+
+
+
+
+
+
+
+
+
 
     # def test_task_set_due_date(self):
     #
@@ -109,6 +101,17 @@ class TestMainPage:
     #     self.ID = json_response["id"]
     #     main_page = MainPage(self.driver)
     #     main_page.edit_task(task_name)
+    #     self.pre_teardown()
+
+    # def test_task_deletion(self):
+    #
+    #     task_name = Utiles.generate_random_string(5)
+    #     body = {"content": task_name, "due_string": "today at 12:00", "due_lang": "en", "priority": 4}
+    #     my_c_api = self.test_p.create_tasks(body)
+    #     json_response = my_c_api.json()
+    #     self.ID = json_response["id"]
+    #     main_page = MainPage(self.driver)
+    #     main_page.delete_task(task_name)
     #     self.pre_teardown()
 
 

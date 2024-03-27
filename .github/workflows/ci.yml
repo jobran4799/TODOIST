@@ -55,6 +55,12 @@ jobs:
         name: pytest-html-report
         path: report
 
+    - name: Notify Slack
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      run: |
+        curl -X POST -H 'Content-type: application/json' --data '{"text":"Tests have been run successfully!"}' $SLACK_WEBHOOK_URL
+
 
 #name: Run pytest tests
 #

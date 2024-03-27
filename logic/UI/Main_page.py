@@ -4,18 +4,12 @@ from infra.UI.Base_Page import BasePage
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-# import json
-# import os
-# from os.path import dirname as up
+
 class MainPage(BasePage):
     USER_NAME = (By.XPATH, "//span[text() = 'Beyonddev']")
     def __init__(self, driver):
         super().__init__(driver)
-        # cur_dir = up(up(up(up(os.path.abspath(__file__)))))
-        # config_location = os.path.join(cur_dir, 'config.json')
-        # with open(config_location) as f:
-        #     self.data = json.load(f)
-        # self.init()
+
 
     def init(self):
         self.user_name = self._driver.find_element(*self.USER_NAME)
@@ -145,12 +139,6 @@ class MainPage(BasePage):
         self.find_task_inputs_to_edit_task(text_edit)
         self.clicker_button_with_retry(self.inputs_to_edit_task)
         self.find_add_descrption()
-        # add_description_element = WebDriverWait(self._driver, 10).until(
-        #     EC.presence_of_element_located(
-        #         (By.XPATH, "//div[contains(@aria-label,'Task description')]"))
-        # )
-        # Wait for the add description element to appear
-        # add_description_element = self._driver.find_element(By.XPATH, "//div[contains(@aria-label,'Task description')]")
 
         # Click on the add description element
         self.clicker_button_with_retry(self.add_descrption)
@@ -222,7 +210,7 @@ class MainPage(BasePage):
 
 
     def click_completed_task(self, task_name):
-        self.completed_task = self.wait_path_to_be_clickbale(30, f"//div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]//button[contains(@class,'task_checkbox')]")
+        self.completed_task = self.wait_path_to_be_clickbale(21, f"//div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]//button[contains(@class,'task_checkbox')]")
         # self.completed_task = self._driver.find_element(By.XPATH,  f"//div[./div[./div[./div[./div[./div[contains(text(),'{task_name}')]]]]]]//button[contains(@class,'task_checkbox')]")
         # self.completed_task.click()
         self.clicker_button_with_retry(self.completed_task)
